@@ -9,8 +9,8 @@
   "scripts": {
     "server": "nodemon index.js",
     "test": "cross-env DATABASE_ENV=testing jest --watch",
-    "start": "node index.js"
-  
+    "start": "node index.js",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
     "graphql": "^14.6.0",
     "graphql-yoga": "^1.18.3",
     "helmet": "^3.21.2",
+    "http": "0.0.0",
     "jest": "^25.1.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.9",
