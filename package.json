@@ -2,7 +2,7 @@
   "name": "life-logger-be",
   "version": "1.0.0",
   "engines": {
-    "node": "13.8.0"
+    "node": ">=12.0.0"
   },
   "description": "🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.",
   "main": "index.js",
