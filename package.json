@@ -9,8 +9,8 @@
   "scripts": {
     "server": "nodemon index.js",
     "test": "cross-env DATABASE_ENV=testing jest --watch",
-    "start": "node index.js",
-    "build": "webpack"
+    "start": "node index.js"
+  
   },
   "repository": {
     "type": "git",
