@@ -10,10 +10,6 @@
     "server": "nodemon index.js",
     "test": "cross-env DATABASE_ENV=testing jest --watch",
     "start": "node index.js"
-<<<<<<< HEAD
-=======
-  
->>>>>>> 709059f43d6f871b5fde508936561c36d65a78fe
   },
   "repository": {
     "type": "git",
