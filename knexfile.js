@@ -3,9 +3,14 @@
 module.exports = {
 
   development: {
-    client: 'sqlite3',
+    client: 'pg',
+    useNullDefault: true,
     connection: {
-      filename: './dev.sqlite3'
+      host: process.env.POSTGRESS_DEV_HOST,
+      port: process.env.POSTGRESS_DEV_PORT,
+      user: process.env.POSTGRESS_DEV_USER,
+      password: process.env.POSTGRESS_DEV_PASSWORD,
+      database: process.envPOSTGRESS_DEV_DATABASE
     }
   },
 
