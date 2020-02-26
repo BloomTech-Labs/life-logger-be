@@ -19,7 +19,7 @@ module.exports = {
     connection: {
       database: process.env.DATABASE_URL,
       user:     'username',
-      password: 'password'
+      password: 'password' 
     },
     pool: {
       afterCreate: (conn, done) => {
@@ -46,4 +46,6 @@ module.exports = {
     }
   }
 
-};
+}
+  }
+}
