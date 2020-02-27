@@ -1,11 +1,19 @@
 // Update with your config settings.
+require('dotenv').config();
 
 module.exports = {
 
   development: {
-    client: 'sqlite3',
+    client: 'pg',
+    useNullDefault: true,
     connection: {
-      filename: './dev.sqlite3'
+ 
+
+      host: process.env.POSTGRESS_DEV_HOST,
+      port: process.env.POSTGRESS_DEV_PORT,
+      user: process.env.POSTGRESS_DEV_USER,
+      password: process.env.POSTGRESS_DEV_PASSWORD,
+      database: process.env.POSTGRESS_DEV_DATABASE
     }
   },
 
@@ -14,7 +22,7 @@ module.exports = {
     connection: {
       database: process.env.DATABASE_URL,
       user:     'username',
-      password: 'password'
+      password: 'password' 
     },
     pool: {
       afterCreate: (conn, done) => {
@@ -41,4 +49,6 @@ module.exports = {
     }
   }
 
-};
+}
+  }
+}
