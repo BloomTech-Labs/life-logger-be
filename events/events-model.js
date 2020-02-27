@@ -2,6 +2,7 @@ const db = require('../data/dbConfig.js');
 
 module.exports = {
     find,
+    findBy,
     findById,
     add,
     update,
@@ -10,27 +11,31 @@ module.exports = {
 
 
 function find() {
-    return db('users');
+    return db('events');
+}
+
+function findBy(filter) {
+    return db('events').where(filter)
 }
 
 function findById(id) {
-    return db('users').where({id}).first();
+    return db('events').where({id}).first();
     }
 
-    function add(user) {
-        return db('users').insert(user)
+    function add(event) {
+        return db('events').insert(event)
         .then(ids => {
              return findById(ids[0])
         })
     }
 
-    function update(changes,id) {
-        return db('users').where({id}).update(changes)
+    function update(id, changes) {
+        return db('events').where({id}).update(changes)
         .then(count => {
             return findById(id)
         })
     }
     
     function remove(id) {
-        return db('users').where({id}).del()
+        return db('events').where({id}).del()
     }
