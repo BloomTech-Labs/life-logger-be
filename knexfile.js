@@ -1,4 +1,5 @@
 // Update with your config settings.
+require('dotenv').config();
 
 module.exports = {
 
@@ -6,11 +7,13 @@ module.exports = {
     client: 'pg',
     useNullDefault: true,
     connection: {
+ 
+
       host: process.env.POSTGRESS_DEV_HOST,
       port: process.env.POSTGRESS_DEV_PORT,
       user: process.env.POSTGRESS_DEV_USER,
       password: process.env.POSTGRESS_DEV_PASSWORD,
-      database: process.envPOSTGRESS_DEV_DATABASE
+      database: process.env.POSTGRESS_DEV_DATABASE
     }
   },
 
