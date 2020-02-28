@@ -2,6 +2,7 @@ require('dotenv').config();
 
 
 // Update with your config settings.
+require('dotenv').config();
 
 module.exports = {
 
@@ -39,7 +40,7 @@ module.exports = {
     connection: {
       database: 'my_db',
       user:     'username',
-      password: 'password'
+      password: 'password' 
     },
     pool: {
       min: 2,
