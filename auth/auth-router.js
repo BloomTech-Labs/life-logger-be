@@ -20,8 +20,8 @@ return jwt.sign(payload,'aeaeiouAndSometimesY', options);
 router.post('/register', (req, res) => {
  
   //const { username, password } = req.body;
-  const { username, password } = req.headers;
-  Users.insert({ username, password: bcrypt.hashSync(password, 8) })
+  const { username, password, email} = req.headers;
+  Users.insert({ username, password: bcrypt.hashSync(password, 8), email })
     .then(id => {
       res.status(201).json({ message: "User registration complete", id });
     })
