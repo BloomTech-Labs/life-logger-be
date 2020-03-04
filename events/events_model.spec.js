@@ -1,5 +1,5 @@
 const Events = require('./events-model.js');
-const db = require('../database/dbConfig.js');
+const db = require('../data/dbConfig.js');
 
 // describe('events-model', () => {
 //     describe('find', () => {
