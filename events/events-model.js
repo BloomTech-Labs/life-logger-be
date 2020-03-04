@@ -18,8 +18,8 @@ function findBy(filter) {
     return db('events').where(filter)
 }
 
-function findById(id) {
-    return db('events').where({id}).first();
+function findById(event_id) {
+    return db('events').where({event_id}).first();
     }
 
     function add(event) {
@@ -29,13 +29,13 @@ function findById(id) {
         })
     }
 
-    function update(id, changes) {
-        return db('events').where({id}).update(changes)
+    function update(event_id, changes) {
+        return db('events').where({event_id}).update(changes)
         .then(count => {
-            return findById(id)
+            return findById(event_id)
         })
     }
     
-    function remove(id) {
-        return db('events').where({id}).del()
+    function remove(event_id) {
+        return db('events').where({event_id}).del()
     }

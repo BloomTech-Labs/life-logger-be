@@ -46,7 +46,7 @@ router.get('/', (req, res) => {
     const { id } = req.params;
     const changes = req.body;
   
-    Events.update(changes,id)
+    Events.update(id,changes)
     .then(event => {
       if (event) {
         res.json({ update: event });
