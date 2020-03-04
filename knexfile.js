@@ -64,10 +64,7 @@ module.exports = {
      }
     }
   }
-<<<<<<< HEAD
-};
-=======
-},
+}
 
   testing: {
     client: "pg",
@@ -87,4 +84,3 @@ module.exports = {
     useNullAsDefault: true
       }
     }
->>>>>>> b303d29a4df97c913d934cbd1fbd1d8d3e4e480e
