@@ -8,17 +8,13 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: { 
-      host: process.env.POSTGRES_DEV_HOST,
-      port: process.env.POSTGRES_DEV_PORT,
-      user: process.env.POSTGRES_DEV_USER,
-      password: process.env.POSTGRES_DEV_PASSWORD,
-      database: process.env.POSTGRES_DEV_DATABASE,
-    },
-    useNullAsDefault: true,
-    migrations: {
-      directory: './migrations',
-      tableName: 'dbmigrations',
+    useNullDefault: true,
+    connection: {
+      host: process.env.POSTGRESS_DEV_HOST,
+      port: process.env.POSTGRESS_DEV_PORT,
+      user: process.env.POSTGRESS_DEV_USER,
+      password: process.env.POSTGRESS_DEV_PASSWORD,
+      database: process.env.POSTGRESS_DEV_DATABASE
     }
   },
   testing: {
@@ -65,6 +61,30 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations'
+     }
     }
   }
+<<<<<<< HEAD
 };
+=======
+},
+
+  testing: {
+    client: "pg",
+    connection: {
+      host: process.env.POSTGRESS_DEV_HOST,
+      port: process.env.POSTGRESS_DEV_PORT,
+      user: process.env.POSTGRESS_DEV_USER,
+      password: process.env.POSTGRESS_DEV_PASSWORD,
+      database: process.env.POSTGRESS_DEV_DATABASE
+    },
+    migrations: {
+      directory: "./migrations"
+    },
+    seeds: {
+      directory: "./seeds"
+    },
+    useNullAsDefault: true
+      }
+    }
+>>>>>>> b303d29a4df97c913d934cbd1fbd1d8d3e4e480e
