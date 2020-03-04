@@ -1,6 +1,3 @@
-require('dotenv').config();
-
-
 // Update with your config settings.
 require('dotenv').config();
 
@@ -17,30 +14,17 @@ module.exports = {
       database: process.env.POSTGRESS_DEV_DATABASE
     }
   },
-  testing: {
-    client: 'sqlite3',
-    connection: {
-      filename: './database/auth.db3',
-    },
-    useNullAsDefault: true,
-    migrations: {
-      directory: './migrations',
-    },
-    seeds: {
-      directory: './seeds',
-    },
-  },
 
   staging: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',
+      database: process.env.DATABASE_URL,
       user:     'username',
       password: 'password' 
     },
     pool: {
-      min: 2,
-      max: 10
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done);
     },
     migrations: {
       tableName: 'knex_migrations'
@@ -50,21 +34,20 @@ module.exports = {
   production: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',
+      database: process.env.DATABASE_URL,
       user:     'username',
       password: 'password'
     },
     pool: {
       afterCreate: (conn, done) => {
         conn.run('PRAGMA foreign_keys = ON', done);
-      }
     },
     migrations: {
       tableName: 'knex_migrations'
      }
     }
   }
-}
+},
 
   testing: {
     client: "pg",
