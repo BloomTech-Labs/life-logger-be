@@ -14,8 +14,8 @@ router.get('/', (req, res) => {
     });
   });
 
-  router.get('/:id', (req, res) => {
-    const { id } = req.params;
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
   
     Events.findById(id)
     .then(event => {
@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
     });
   });
 
-  router.post('/', (req, res) => {
+router.post('/', (req, res) => {
     const eventData = req.body;
   
    Events.add(eventData)
@@ -42,14 +42,13 @@ router.get('/', (req, res) => {
     });
   });
 
-  router.put('/:id', (req, res) => {
-    const { id } = req.params;
+router.put('/:id', (req, res) => {
     const changes = req.body;
   
-    Events.update(id,changes)
+    Events.update(req.params.id,changes)
     .then(event => {
       if (event) {
-        res.json({ update: event });
+        res.status(200).json(event);
       } else {
         res.status(404).json({ message: 'Could not find event with given id' });
       }
@@ -58,8 +57,9 @@ router.get('/', (req, res) => {
       res.status(500).json({ message: 'Failed to update event'});
     });
   });
+
   
-  router.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     const { id } = req.params;
   
     Events.remove(id)

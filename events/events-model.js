@@ -29,13 +29,19 @@ function findById(event_id) {
         })
     }
 
+    // function update(id, changes) {
+    //     return db('events').where({id}).update(changes,'*')
+    //     .then(count => {
+    //         return findById(id)
+    //     })
+    // }
     function update(event_id, changes) {
-        return db('events').where({event_id}).update(changes)
-        .then(count => {
-            return findById(event_id)
-        })
-    }
-    
+        return db('events')
+          .where({ event_id })
+          .update(changes, '*');
+      }
+      
+
     function remove(event_id) {
         return db('events').where({event_id}).del()
     }
