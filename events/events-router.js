@@ -2,9 +2,11 @@ const express = require('express');
 
 const Events = require('./events-model.js');
 
+const nopass = require('../auth/authenticate-middleware');
+
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/',  nopass , (req, res) => {
     Events.find()
     .then(events => {
       res.status(200).json(events);
@@ -14,7 +16,7 @@ router.get('/', (req, res) => {
     });
   });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', nopass , (req, res) => {
   const { id } = req.params;
   
     Events.findById(id)
@@ -30,7 +32,7 @@ router.get('/:id', (req, res) => {
     });
   });
 
-router.post('/', (req, res) => {
+router.post('/', nopass , (req, res) => {
     const eventData = req.body;
   
    Events.add(eventData)
@@ -42,7 +44,7 @@ router.post('/', (req, res) => {
     });
   });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', nopass , (req, res) => {
     const changes = req.body;
   
     Events.update(req.params.id,changes)
@@ -59,7 +61,7 @@ router.put('/:id', (req, res) => {
   });
 
   
-router.delete('/:id', (req, res) => {
+router.delete('/:id', nopass , (req, res) => {
     const { id } = req.params;
   
     Events.remove(id)
