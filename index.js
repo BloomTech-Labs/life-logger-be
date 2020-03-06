@@ -1,9 +1,18 @@
-require('dotenv').config();
+const { GraphQLServer } = require('graphql-yoga');
 
-const server = require('./api/server.js');
+// const resolvers = {
+//   Query,
+//   Mutation,
+//   Subscription,
+//   User,
+//   Link,
+//   Vote,
+// }
 
-const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => console.log(`\n*** Server running on PORT ${PORT} ***\n`));
+const server = new GraphQLServer({
+  typeDefs: './src/schema.graphql',
+  resolvers,
+  context: { prisma }
+})
 
-
-// this will be entry point for GraphQL server
+server.start(() => console.log(`Server is running on http://localhost:4000`))
