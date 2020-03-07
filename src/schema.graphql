@@ -17,8 +17,10 @@ type Event {
 type Query {
   user(id: ID!): User
   event(id: ID!): Event
+  allUsers(last: Int): [User!]!
+  allEvents(last: int): [Event!]!
 }
 
 type Mutation {
-  
+
 }
