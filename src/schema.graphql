@@ -11,7 +11,9 @@ type Event {
   description: String!
   location: String
   category: String
-  createdAt: 
+  # createdAt: 
+  # startsAt:
+  # endsAt:
 }
 
 type Query {
@@ -22,5 +24,14 @@ type Query {
 }
 
 type Mutation {
-
+  createUser(username: String!, password: String!, email: String!): User!
+  updateUser(id: ID!, username: String, password: String, email: String): User!
+  deleteUser(id: ID!): User!
+  createEvent(
+    title: String!, description: String!,
+    location: String, category: String,
+    createdAt: ---, startsAt: ---,
+    endsAt:---): Event!
+  # updateEvent
+  # deleteEvent
 }
