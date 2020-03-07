@@ -1,0 +1,24 @@
+type User {
+  id: ID!
+  username: String!
+  password: String!
+  email: String!
+}
+
+type Event {
+  id: ID!
+  title: String!
+  description: String!
+  location: String
+  category: String
+  createdAt: 
+}
+
+type Query {
+  user(id: ID!): User
+  event(id: ID!): Event
+}
+
+type Mutation {
+  
+}
