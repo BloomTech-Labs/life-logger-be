@@ -19,8 +19,8 @@ type Event {
 type Query {
   user(id: ID!): User
   event(id: ID!): Event
-  allUsers(last: Int): [User!]!
-  allEvents(last: int): [Event!]!
+  allUsers: [User!]!
+  # allEvents(last: int): [Event!]!
 }
 
 type Mutation {
@@ -30,8 +30,12 @@ type Mutation {
   createEvent(
     title: String!, description: String!,
     location: String, category: String,
-    createdAt: ---, startsAt: ---,
-    endsAt:---): Event!
+  ): Event!
+  # createEvent(
+  #   title: String!, description: String!,
+  #   location: String, category: String,
+  #   createdAt: ---, startsAt: ---,
+  #   endsAt:---): Event!
   # updateEvent
   # deleteEvent
 }

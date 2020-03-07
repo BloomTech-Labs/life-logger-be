@@ -7,7 +7,6 @@
   "description": "🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon index.js",
     "test": "cross-env DATABASE_ENV=testing jest --watch",
     "start": "node index.js",
     "coverage": "jest --coverage --detectOpenHandles --forceExit || true"
@@ -36,7 +35,6 @@
     "dotenv": "^8.2.0",
     "graphql-yoga": "^1.18.3",
     "jest": "^25.1.0",
-    "jsonwebtoken": "^8.5.1",
-    "nodemon": "^2.0.2"
+    "jsonwebtoken": "^8.5.1"
   }
 }
