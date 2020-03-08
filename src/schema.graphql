@@ -1,20 +1,3 @@
-type User {
-  id: ID!
-  username: String!
-  password: String!
-  email: String!
-}
-
-type Event {
-  id: ID!
-  title: String!
-  description: String!
-  location: String
-  category: String
-  # createdAt: 
-  # startsAt:
-  # endsAt:
-}
 
 type Query {
   user(id: ID!): User
@@ -38,4 +21,22 @@ type Mutation {
   #   endsAt:---): Event!
   # updateEvent
   # deleteEvent
+}
+
+type User {
+  id: ID!
+  username: String!
+  password: String!
+  email: String!
+}
+
+type Event {
+  id: ID!
+  title: String!
+  description: String!
+  location: String
+  category: String
+  # createdAt: 
+  # startsAt:
+  # endsAt:
 }
