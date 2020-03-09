@@ -28,15 +28,23 @@ type User {
   username: String!
   password: String!
   email: String!
+  events: [Event!]!
 }
 
 type Event {
   id: ID!
   title: String!
   description: String!
-  location: String
-  category: String
-  # createdAt: 
-  # startsAt:
-  # endsAt:
+  category: String!
+  location: Location
+  createdBy: User!
+  createdAt: String!
+  startsAt: String
+  endsAt: String
+}
+
+type Location {
+  id: ID!
+  latitude: Float!
+  longitude: Float!
 }

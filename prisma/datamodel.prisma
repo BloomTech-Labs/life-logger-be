@@ -1,0 +1,24 @@
+type User {
+  id: ID! @id
+  username: String!
+  password: String!
+  email: String!
+  createdAt: DateTime! @createdAt
+}
+
+type Event {
+  id: ID! @id
+  title: String!
+  description: String!
+  location: Location
+  category: String! @default(value: "uncategorized")
+  createdAt: DateTime! @createdAt
+  startsAt: DateTime
+  endsAt: DateTime
+}
+
+type Location {
+  id: ID! @id
+  latitude: Float!
+  longitude: Float!
+}
