@@ -2,7 +2,6 @@
 require('dotenv').config();
 
 module.exports = {
-
   development: {
     client: 'pg',
     useNullDefault: true,
@@ -19,38 +18,39 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: process.env.DATABASE_URL,
-      user:     'usnhwxthladbrs',
-      password: '2a2ec608941c6de87a23925bd2552c201f2506d2cb3ee1e700c331bd9009ff5d' 
+      user: 'usnhwxthladbrs',
+      password:
+        '2a2ec608941c6de87a23925bd2552c201f2506d2cb3ee1e700c331bd9009ff5d'
     },
     pool: {
       afterCreate: (conn, done) => {
         conn.run('PRAGMA foreign_keys = ON', done);
+      },
+      migrations: {
+        tableName: 'knex_migrations'
+      }
     },
-    migrations: {
-      tableName: 'knex_migrations'
+
+    production: {
+      client: 'postgresql',
+      connection: {
+        database: process.env.DATABASE_URL,
+        user: 'username',
+        password: 'password'
+      },
+      pool: {
+        afterCreate: (conn, done) => {
+          conn.run('PRAGMA foreign_keys = ON', done);
+        },
+        migrations: {
+          tableName: 'knex_migrations'
+        }
+      }
     }
   },
 
-  production: {
-    client: 'postgresql',
-    connection: {
-      database: process.env.DATABASE_URL,
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      afterCreate: (conn, done) => {
-        conn.run('PRAGMA foreign_keys = ON', done);
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-     }
-    }
-  }
-},
-
   testing: {
-    client: "pg",
+    client: 'pg',
     connection: {
       host: process.env.POSTGRESS_DEV_HOST,
       port: process.env.POSTGRESS_DEV_PORT,
@@ -59,11 +59,11 @@ module.exports = {
       database: process.env.POSTGRESS_DEV_DATABASE
     },
     migrations: {
-      directory: "./migrations"
+      directory: './migrations'
     },
     seeds: {
-      directory: "./seeds"
+      directory: './seeds'
     },
     useNullAsDefault: true
-      }
-    }
+  }
+};
