@@ -8,17 +8,11 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon index.js",
-    "test": "cross-env DATABASE_ENV=testing jest --watch",
-    "start": "node index.js",
-    "coverage": "jest --coverage --detectOpenHandles --forceExit || true"
+    "test": "cross-env DB_ENV=testing jest --watch",
+    "start": "node index.js"
   },
   "jest": {
-    "collectCoverageFrom": [
-      "**/*.{js,jsx}",
-      "!**/node_modules/**",
-      "!**/vendor/**",
-      "!**/__tests__/**"
-    ]
+    "testEnvirnoment": "node"
   },
   "repository": {
     "type": "git",
@@ -35,6 +29,7 @@
     "bcryptjs": "^2.4.3",
     "codeclimate-test-reporter": "^0.5.1",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^14.6.0",
