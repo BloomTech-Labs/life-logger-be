@@ -1,5 +1,5 @@
 exports.up = function(knex) {
-    return knex.schema.createTable('events', function(table) {
+    return knex.schema.createTableIfNotExists('events', function(table) {
       table.increments();
       table.integer('user_id').references('id').inTable('users');
       table.string('Title').notNullable();
