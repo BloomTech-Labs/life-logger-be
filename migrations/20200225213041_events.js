@@ -9,6 +9,8 @@ exports.up = function(knex) {
       table.timestamp('Event_Ct_Tm').defaultTo(knex.fn.now());
       table.timestamp('Event_St_Tm').defaultTo(knex.fn.now());
       table.timestamp('Event_Et_Tm').defaultTo(knex.fn.now());
+      table.boolean('All_Day');
+      table.string('Event_resource');
      })
   }
   
