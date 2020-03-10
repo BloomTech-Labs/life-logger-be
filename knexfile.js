@@ -29,18 +29,22 @@ module.exports = {
       migrations: {
         tableName: 'knex_migrations'
       }
-    },
+    }
+  },
 
-    production: {
-      client: 'postgresql',
-      connection: process.env.DATABASE_URL,
-      pool: {
-        afterCreate: (conn, done) => {
-          conn.run('PRAGMA foreign_keys = ON', done);
-        },
-        migrations: {
-          directory: './migrations'
-        }
+  production: {
+    client: 'postgresql',
+    connection: {
+      database: process.env.DATABASE_URL,
+      user: 'username',
+      password: 'password'
+    },
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done);
+      },
+      migrations: {
+        tableName: 'knex_migrations'
       }
     }
   },
