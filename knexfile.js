@@ -33,17 +33,13 @@ module.exports = {
 
     production: {
       client: 'postgresql',
-      connection: {
-        database: process.env.DATABASE_URL,
-        user: 'username',
-        password: 'password'
-      },
+      connection: process.env.DATABASE_URL,
       pool: {
         afterCreate: (conn, done) => {
           conn.run('PRAGMA foreign_keys = ON', done);
         },
         migrations: {
-          tableName: 'knex_migrations'
+          directory: './migrations'
         }
       }
     }
