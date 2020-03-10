@@ -39,13 +39,11 @@ module.exports = {
       user: 'username',
       password: 'password'
     },
-    pool: {
-      afterCreate: (conn, done) => {
-        conn.run('PRAGMA foreign_keys = ON', done);
-      },
-      migrations: {
-        tableName: 'knex_migrations'
-      }
+    migrations: {
+      directory: './database/migrations'
+    },
+    seeds: {
+      directory: './database/seeds'
     }
   },
 
