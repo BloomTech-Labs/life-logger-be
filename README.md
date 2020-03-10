@@ -18,9 +18,9 @@ To get the server running locally:
 🚫 adjust these scripts to match your project
 
 - Clone this repo
-- **yarn install** to install all required dependencies
-- **yarn server** to start the local server
-- **yarn test** to start server using testing environment
+- **npm install** to install all required dependencies
+- **npm start** to start the local server
+- **npm test** to start server using testing environment
 
 ### Backend framework goes here
 
@@ -33,43 +33,43 @@ To get the server running locally:
 
 ## 2️⃣ Endpoints
 
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
-
-#### Organization Routes
+#### Events Routes
 
 | Method | Endpoint                | Access Control | Description                                  |
 | ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
+| GET    | `/api/events`           | all events     | Returns all events in the evenst table.      |
+| GET    | `/api/events/:id`       | owners         | Get event by event id.                       |
+| POST   | `/api/events`           | owners         | Add a new events.                            |
+| PUT    | `/api/events/:id`       | owners         | Update an new event.                         |
+| DELETE | `/api/events/:id`       | owners         | Delete an event.                             |
 
-#### User Routes
+#### Users Routes
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
+| POST    | `/api/auth/register`   | all users           | register a new user.                               |
+| GOST    | `/api/auth/login`      | all users           | Login                                              |
+
 
 # Data Model
 
-🚫This is just an example. Replace this with your data model
-
-#### 2️⃣ ORGANIZATIONS
+#### 2️⃣ EVENTS
 
 ---
 
 ```
 {
-  id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
+   Event_ID serial PRIMARY KEY,
+   User_ID integer NOT NULL,
+   Title VARCHAR (50),	
+   Event_Text VARCHAR (250),	
+   Location VARCHAR (50),
+   Category integer,
+   Event_Dt_Tm TIMESTAMP,
+   Event_St_Tm TIMESTAMP,
+   Event_Et_Tm TIMESTAMP,
+   All_Day BOOLEAN,
+   Event_resource VARCHAR (250)
 }
 ```
 
@@ -79,59 +79,24 @@ To get the server running locally:
 
 ```
 {
-  id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
-  first_name: STRING
-  last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
-  email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
+  id serial PRIMARY KEY,
+  username VARCHAR (255) UNIQUE NOT NULL,
+  password VARCHAR (255) NOT NULL,
+  email VARCHAR (355) UNIQUE NOT NULL
 }
 ```
 
-## 2️⃣ Actions
-
-🚫 This is an example, replace this with the actions that pertain to your backend
-
-`getOrgs()` -> Returns all organizations
-
-`getOrg(orgId)` -> Returns a single organization by ID
-
-`addOrg(org)` -> Returns the created org
-
-`updateOrg(orgId)` -> Update an organization by ID
-
-`deleteOrg(orgId)` -> Delete an organization by ID
-<br>
-<br>
-<br>
-`getUsers(orgId)` -> if no param all users
-
-`getUser(userId)` -> Returns a single user by user ID
-
-`addUser(user object)` --> Creates a new user and returns that user. Also creates 7 availabilities defaulted to hours of operation for their organization.
-
-`updateUser(userId, changes object)` -> Updates a single user by ID.
-
-`deleteUser(userId)` -> deletes everything dependent on the user
-
 ## 3️⃣ Environment Variables
-
-In order for the app to function correctly, the user must set up their own environment variables.
 
 create a .env file that includes the following:
 
-🚫 These are just examples, replace them with the specifics for your app
-    
-    *  STAGING_DB - optional development db for using functionality not available in SQLite
-    *  NODE_ENV - set to "development" until ready for "production"
-    *  JWT_SECRET - you can generate this by using a python shell and running import random''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&amp;*(-*=+)') for i in range(50)])
-    *  SENDGRID_API_KEY - this is generated in your Sendgrid account
-    *  stripe_secret - this is generated in the Stripe dashboard
+    *  POSTGRESS_DEV_HOST=localhost
+    *  POSTGRESS_DEV_PORT=5432
+    *  POSTGRESS_DEV_USER=postgres
+    *  POSTGRESS_DEV_PASSWORD=password
+    *  POSTGRESS_DEV_DATABASE=lifelogger_be  
+    *  JWT_SECRET="aeaeiouAndSometimesY"
+   
     
 ## Contributing
 

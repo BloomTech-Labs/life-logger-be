@@ -1,5 +1,5 @@
 exports.up = function(knex) {
-    return knex.schema.createTable('events', function(table) {
+    return knex.schema.createTableIfNotExists('events', function(table) {
       table.increments();
       table.integer('user_id').references('id').inTable('users');
       table.string('Title').notNullable();
@@ -9,6 +9,8 @@ exports.up = function(knex) {
       table.timestamp('Event_Ct_Tm').defaultTo(knex.fn.now());
       table.timestamp('Event_St_Tm').defaultTo(knex.fn.now());
       table.timestamp('Event_Et_Tm').defaultTo(knex.fn.now());
+      table.boolean('All_Day');
+      table.string('Event_resource');
      })
   }
   
