@@ -40,10 +40,10 @@ module.exports = {
       password: 'password'
     },
     migrations: {
-      directory: './database/migrations'
+      directory: './migrations'
     },
     seeds: {
-      directory: './database/seeds'
+      directory: './seeds'
     }
   },
 
