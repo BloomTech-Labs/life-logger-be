@@ -16,19 +16,12 @@ module.exports = {
 
   staging: {
     client: 'postgresql',
-    connection: {
-      database: process.env.DATABASE_URL,
-      user: 'usnhwxthladbrs',
-      password:
-        '2a2ec608941c6de87a23925bd2552c201f2506d2cb3ee1e700c331bd9009ff5d'
+    connection: process.env.DATABASE_URL,
+    migrations: {
+      tableName: 'knex_migrations'
     },
-    pool: {
-      afterCreate: (conn, done) => {
-        conn.run('PRAGMA foreign_keys = ON', done);
-      },
-      migrations: {
-        tableName: 'knex_migrations'
-      }
+    seeds: {
+      directory: './seeds'
     }
   },
 
