@@ -3,6 +3,7 @@ type Query {
   user(id: ID!): User
   event(id: ID!): Event
   allUsers: [User!]!
+  info: String!
   # allEvents(last: int): [Event!]!
 }
 

@@ -27,6 +27,7 @@ type Event {
   description: String!
   location: Location
   category: String!
+  createdBy: User!
   createdAt: DateTime!
   startsAt: DateTime
   endsAt: DateTime
@@ -39,6 +40,22 @@ type EventConnection {
 }
 
 input EventCreateInput {
+  id: ID
+  title: String!
+  description: String!
+  location: LocationCreateOneInput
+  category: String
+  createdBy: UserCreateOneWithoutEventsInput!
+  startsAt: DateTime
+  endsAt: DateTime
+}
+
+input EventCreateManyWithoutCreatedByInput {
+  create: [EventCreateWithoutCreatedByInput!]
+  connect: [EventWhereUniqueInput!]
+}
+
+input EventCreateWithoutCreatedByInput {
   id: ID
   title: String!
   description: String!
@@ -80,6 +97,92 @@ type EventPreviousValues {
   endsAt: DateTime
 }
 
+input EventScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  category: String
+  category_not: String
+  category_in: [String!]
+  category_not_in: [String!]
+  category_lt: String
+  category_lte: String
+  category_gt: String
+  category_gte: String
+  category_contains: String
+  category_not_contains: String
+  category_starts_with: String
+  category_not_starts_with: String
+  category_ends_with: String
+  category_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  startsAt: DateTime
+  startsAt_not: DateTime
+  startsAt_in: [DateTime!]
+  startsAt_not_in: [DateTime!]
+  startsAt_lt: DateTime
+  startsAt_lte: DateTime
+  startsAt_gt: DateTime
+  startsAt_gte: DateTime
+  endsAt: DateTime
+  endsAt_not: DateTime
+  endsAt_in: [DateTime!]
+  endsAt_not_in: [DateTime!]
+  endsAt_lt: DateTime
+  endsAt_lte: DateTime
+  endsAt_gt: DateTime
+  endsAt_gte: DateTime
+  AND: [EventScalarWhereInput!]
+  OR: [EventScalarWhereInput!]
+  NOT: [EventScalarWhereInput!]
+}
+
 type EventSubscriptionPayload {
   mutation: MutationType!
   node: Event
@@ -103,6 +206,15 @@ input EventUpdateInput {
   description: String
   location: LocationUpdateOneInput
   category: String
+  createdBy: UserUpdateOneRequiredWithoutEventsInput
+  startsAt: DateTime
+  endsAt: DateTime
+}
+
+input EventUpdateManyDataInput {
+  title: String
+  description: String
+  category: String
   startsAt: DateTime
   endsAt: DateTime
 }
@@ -113,6 +225,43 @@ input EventUpdateManyMutationInput {
   category: String
   startsAt: DateTime
   endsAt: DateTime
+}
+
+input EventUpdateManyWithoutCreatedByInput {
+  create: [EventCreateWithoutCreatedByInput!]
+  delete: [EventWhereUniqueInput!]
+  connect: [EventWhereUniqueInput!]
+  set: [EventWhereUniqueInput!]
+  disconnect: [EventWhereUniqueInput!]
+  update: [EventUpdateWithWhereUniqueWithoutCreatedByInput!]
+  upsert: [EventUpsertWithWhereUniqueWithoutCreatedByInput!]
+  deleteMany: [EventScalarWhereInput!]
+  updateMany: [EventUpdateManyWithWhereNestedInput!]
+}
+
+input EventUpdateManyWithWhereNestedInput {
+  where: EventScalarWhereInput!
+  data: EventUpdateManyDataInput!
+}
+
+input EventUpdateWithoutCreatedByDataInput {
+  title: String
+  description: String
+  location: LocationUpdateOneInput
+  category: String
+  startsAt: DateTime
+  endsAt: DateTime
+}
+
+input EventUpdateWithWhereUniqueWithoutCreatedByInput {
+  where: EventWhereUniqueInput!
+  data: EventUpdateWithoutCreatedByDataInput!
+}
+
+input EventUpsertWithWhereUniqueWithoutCreatedByInput {
+  where: EventWhereUniqueInput!
+  update: EventUpdateWithoutCreatedByDataInput!
+  create: EventCreateWithoutCreatedByInput!
 }
 
 input EventWhereInput {
@@ -173,6 +322,7 @@ input EventWhereInput {
   category_not_starts_with: String
   category_ends_with: String
   category_not_ends_with: String
+  createdBy: UserWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -401,6 +551,7 @@ type User {
   password: String!
   email: String!
   createdAt: DateTime!
+  events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event!]
 }
 
 type UserConnection {
@@ -410,6 +561,19 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
+  username: String!
+  password: String!
+  email: String!
+  events: EventCreateManyWithoutCreatedByInput
+}
+
+input UserCreateOneWithoutEventsInput {
+  create: UserCreateWithoutEventsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutEventsInput {
   id: ID
   username: String!
   password: String!
@@ -464,12 +628,31 @@ input UserUpdateInput {
   username: String
   password: String
   email: String
+  events: EventUpdateManyWithoutCreatedByInput
 }
 
 input UserUpdateManyMutationInput {
   username: String
   password: String
   email: String
+}
+
+input UserUpdateOneRequiredWithoutEventsInput {
+  create: UserCreateWithoutEventsInput
+  update: UserUpdateWithoutEventsDataInput
+  upsert: UserUpsertWithoutEventsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutEventsDataInput {
+  username: String
+  password: String
+  email: String
+}
+
+input UserUpsertWithoutEventsInput {
+  update: UserUpdateWithoutEventsDataInput!
+  create: UserCreateWithoutEventsInput!
 }
 
 input UserWhereInput {
@@ -537,6 +720,9 @@ input UserWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
+  events_every: EventWhereInput
+  events_some: EventWhereInput
+  events_none: EventWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
@@ -544,6 +730,7 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
+  email: String
 }
 `
       }

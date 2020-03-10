@@ -6,32 +6,15 @@ const testUsers = [{
   email: 'john@mail.com'
 }]
 
+function info() {
+  return "This is GraphQL server for Life Logger project"
+}
 
-function allUsers() {
+function allUsers(root, args, context, info) {
   return context.prisma.users();
-  // return testUsers
 }
 
 module.exports = {
   allUsers,
-}
-
-
-
-
-const resolvers = {
-  Query: {
-    info: () => `This is the API of a Hackernews Clone`,
-    feed: (root, args, context, info) => {
-      return context.prisma.links()
-    },
-  },
-  Mutation: {
-    post: (root, args, context) => {
-      return context.prisma.createLink({
-        url: args.url,
-        description: args.description,
-      })
-    },
-  },
+  info,
 }

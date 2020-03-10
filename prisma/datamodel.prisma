@@ -2,8 +2,9 @@ type User {
   id: ID! @id
   username: String!
   password: String!
-  email: String!
+  email: String! @unique
   createdAt: DateTime! @createdAt
+  events: [Event!]!
 }
 
 type Event {
@@ -12,6 +13,7 @@ type Event {
   description: String!
   location: Location
   category: String! @default(value: "uncategorized")
+  createdBy: User!
   createdAt: DateTime! @createdAt
   startsAt: DateTime
   endsAt: DateTime
