@@ -1,5 +1,7 @@
 GRADE BADGE
-https://api.codeclimate.com/v1/badges/0915a297bde344a86b20/maintainability
+[![Maintainability](https://api.codeclimate.com/v1/badges/0915a297bde344a86b20/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/life-logger-be/maintainability)
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/0915a297bde344a86b20/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/life-logger-be/maintainability)
 
 🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
 
@@ -9,7 +11,7 @@ https://api.codeclimate.com/v1/badges/0915a297bde344a86b20/maintainability
 
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+#### 1️⃣ Backend delpoyed at [Heroku][https://production-life-logger-be.herokuapp.com/)] <br>
 
 ## 1️⃣ Getting started
 
@@ -35,20 +37,20 @@ To get the server running locally:
 
 #### Events Routes
 
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/api/events`           | all events     | Returns all events in the evenst table.      |
-| GET    | `/api/events/:id`       | owners         | Get event by event id.                       |
-| POST   | `/api/events`           | owners         | Add a new events.                            |
-| PUT    | `/api/events/:id`       | owners         | Update an new event.                         |
-| DELETE | `/api/events/:id`       | owners         | Delete an event.                             |
+| Method | Endpoint          | Access Control | Description                             |
+| ------ | ----------------- | -------------- | --------------------------------------- |
+| GET    | `/api/events`     | all events     | Returns all events in the evenst table. |
+| GET    | `/api/events/:id` | owners         | Get event by event id.                  |
+| POST   | `/api/events`     | owners         | Add a new events.                       |
+| PUT    | `/api/events/:id` | owners         | Update an new event.                    |
+| DELETE | `/api/events/:id` | owners         | Delete an event.                        |
 
 #### Users Routes
 
-| Method | Endpoint                | Access Control      | Description                                        |
-| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| POST    | `/api/auth/register`   | all users           | register a new user.                               |
-| GOST    | `/api/auth/login`      | all users           | Login                                              |
+| Method | Endpoint             | Access Control | Description          |
+| ------ | -------------------- | -------------- | -------------------- |
+| POST   | `/api/auth/register` | all users      | register a new user. |
+| GOST   | `/api/auth/login`    | all users      | Login                |
 
 
 # Data Model
