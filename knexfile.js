@@ -2,7 +2,6 @@
 require('dotenv').config();
 
 module.exports = {
-
   development: {
     client: 'pg',
     useNullDefault: true,
@@ -21,7 +20,7 @@ module.exports = {
     migrations: {
       tableName: 'knex_migrations'
     },
-    seeds: { 
+    seeds: {
       directory: './seeds'
     }
   },
@@ -31,14 +30,14 @@ module.exports = {
     connection: process.env.DATABASE_URL,
     migrations: {
       directory: './migrations'
-     },
-     seeds: {
-       directory: './seeds'
+    },
+    seeds: {
+      directory: './seeds'
     }
-},
+  },
 
   testing: {
-    client: "pg",
+    client: 'pg',
     connection: {
       host: process.env.POSTGRESS_DEV_HOST,
       port: process.env.POSTGRESS_DEV_PORT,
@@ -47,11 +46,11 @@ module.exports = {
       database: process.env.POSTGRESS_DEV_DATABASE
     },
     migrations: {
-      directory: "./migrations"
+      directory: './migrations'
     },
     seeds: {
-      directory: "./seeds"
+      directory: './seeds'
     },
     useNullAsDefault: true
-      }
-    };
+  }
+};
