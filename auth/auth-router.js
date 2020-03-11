@@ -17,7 +17,8 @@ function generateToken(user) {
 }
 
 router.post('/register', (req, res) => {
-  const { username, password, email } = req.body;
+  //const { username, password, email } = req.body;
+  const { username, password, email } = req.header;
   Users.insert({
     username,
     password: bcrypt.hashSync(password, 8),
@@ -38,7 +39,8 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-  const { username, password } = req.body;
+  //const { username, password } = req.body;
+  const { username, password } = req.header;
   Users.findByUsername(username)
     .then(user => {
       if (
