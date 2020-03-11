@@ -1,7 +1,7 @@
 GRADE BADGE
 [![Maintainability](https://api.codeclimate.com/v1/badges/0915a297bde344a86b20/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/life-logger-be/maintainability)
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/0915a297bde344a86b20/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/life-logger-be/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/0915a297bde344a86b20/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/life-logger-be/test_coverage)
 
 🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
 
