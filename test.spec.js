@@ -7,7 +7,7 @@ const request = require("supertest");
 
 // login end point test
 describe('POST', ()=> {
-    describe('POST', ()=>{
+    describe('GET', ()=>{
         it('return a 404 OK', ()=>{
             return request(server)
             .get('/api/auth/login')
@@ -27,7 +27,7 @@ describe('POST', ()=> {
 
 // register end point test
 describe('POST', ()=> {
-    describe('POST', ()=>{
+    describe('GET', ()=>{
         it('return a 404 OK', ()=>{
             return request(server)
             .get('/api/auth/register')
@@ -45,7 +45,7 @@ describe('POST', ()=> {
     })
 })
 
-/* events end point test
+//events end point test
 describe('GET', ()=> {
     describe('GET', ()=>{
         it('return a 404 OK', ()=>{
@@ -84,4 +84,3 @@ describe('GET', ()=> {
          })  
     })
 })
-*/
