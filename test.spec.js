@@ -2,12 +2,12 @@ const server = require("./api/server.js");
 
 const request = require("supertest");
 
-const db = require("./data/dbConfig");
+//const db = require("./data/dbConfig");
 
 
 // login end point test
 describe('POST', ()=> {
-    describe('GET', ()=>{
+    describe('POST', ()=>{
         it('return a 404 OK', ()=>{
             return request(server)
             .get('/api/auth/login')
@@ -27,7 +27,7 @@ describe('POST', ()=> {
 
 // register end point test
 describe('POST', ()=> {
-    describe('GET', ()=>{
+    describe('POST', ()=>{
         it('return a 404 OK', ()=>{
             return request(server)
             .get('/api/auth/register')
@@ -45,7 +45,7 @@ describe('POST', ()=> {
     })
 })
 
-// events end point test
+/* events end point test
 describe('GET', ()=> {
     describe('GET', ()=>{
         it('return a 404 OK', ()=>{
@@ -84,3 +84,4 @@ describe('GET', ()=> {
          })  
     })
 })
+*/

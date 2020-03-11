@@ -12,7 +12,7 @@
     "start": "node index.js"
   },
   "jest": {
-    "testEnvirnoment": "node"
+    "testEnvironment": "node"
   },
   "repository": {
     "type": "git",
