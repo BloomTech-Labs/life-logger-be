@@ -3,21 +3,14 @@ GRADE BADGE
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/0915a297bde344a86b20/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/life-logger-be/test_coverage)
 
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
-
-🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
-
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
 
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [Heroku][https://production-life-logger-be.herokuapp.com/)] <br>
+#### Backend deployed at [Heroku](https://production-life-logger-be.herokuapp.com/) <br>
 
-## 1️⃣ Getting started
+## Getting started
 
 To get the server running locally:
-
-🚫 adjust these scripts to match your project
 
 - Clone this repo
 - **npm install** to install all required dependencies
@@ -33,7 +26,7 @@ To get the server running locally:
 -    Point Three
 -    Point Four
 
-## 2️⃣ Endpoints
+## Endpoints
 
 #### Events Routes
 
@@ -55,7 +48,7 @@ To get the server running locally:
 
 # Data Model
 
-#### 2️⃣ EVENTS
+#### EVENTS
 
 ---
 
@@ -88,7 +81,7 @@ To get the server running locally:
 }
 ```
 
-## 3️⃣ Environment Variables
+## Environment Variables
 
 create a .env file that includes the following:
 
@@ -138,5 +131,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
-🚫 Add DS iOS and/or Andriod links here if applicable.
+See [Frontend Documentation](https://github.com/Lambda-School-Labs/life-logger-fe/blob/master/README.md) for details on the fronend of our project.
