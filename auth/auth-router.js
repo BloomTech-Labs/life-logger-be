@@ -17,19 +17,17 @@ function generateToken(user) {
 }
 
 router.post('/register', (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, email } = req.body;
   Users.insert({
     username,
     password: bcrypt.hashSync(password, 8),
     email
   })
     .then(id => {
-      res
-        .status(201)
-        .json({
-          message: 'User registration complete',
-          id
-        });
+      res.status(201).json({
+        message: 'User registration complete',
+        id
+      });
     })
     .catch(err => {
       console.log(err);
