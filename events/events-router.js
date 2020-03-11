@@ -1,73 +1,82 @@
-const express = require('express');
+const router = require('express').Router()
 
 const Events = require('./events-model.js');
 
 const nopass = require('../auth/authenticate-middleware');
 
-const router = express.Router();
-
-router.get('/',  nopass , (req, res) => {
+// Return All events 
+router.get('/', nopass , (req, res) => {
     Events.find()
-    .then(events => {
-      res.status(200).json(events);
-    })
-    .catch(error => {
-      res.status(500).json(error);
-    });
-  });
+.then(event => {
+    res.json(event);
+})
+.catch(err => {
+ console.log(err);
+ res.status(500).json({ message: "Error Fetching events!"});
 
-router.get('/:id', nopass , (req, res) => {
-  const { id } = req.params;
+})
+
+});
+
+// Return and Event by event_id
+router.get('/findById/:events_id', nopass , (req, res, next) => {
+
+    const { event_id } = req.params;
+
+    Events.findById(event_id)
+    .where({event_id})
+.then(event => {
+    res.json(event);
+})
+.catch(err => {
+ console.log(err);
+ res.status(500).json({ message: "Error Fetching Event!"});
+
+})
+
+});
+
+// Return Events by user_id
+router.get('/byuserid/:user_id', nopass , (req, res, next) => {
+
+    const { user_id } = req.params;
+
+    Events.findByUserId(user_id)
+    .where({user_id})
+.then(event => {
+    res.json(event);
+})
+.catch(err => {
+ console.log(err);
+ res.status(500).json({ message: "Error Fetching Events!"});
+
+})
+
+});
+
+// Insert an Event
+router.post('/insertevents', nopass, (req, res) => {
+    
+    const EventData = req.body;
   
-    Events.findById(id)
+    Events.add(EventData)
     .then(event => {
-      if (event) {
-        res.json(event);
-      } else {
-        res.status(404).json({ message: 'Could not find event with given id.' })
-      }
+      res.status(201).json(event);
     })
-    .catch(err => {
-      res.status(500).json({ message: 'Failed to get event' });
+    .catch (err => {
+      res.status(500).json({ message: 'Failed to create new event!' });
     });
   });
 
-router.post('/', nopass , (req, res) => {
-    const eventData = req.body;
-  
-   Events.add(eventData)
-    .then(newevent => {
-      res.status(201).json(newevent);
-    })
-    .catch(err => {
-      res.status(500).json({ message: 'Failed to create new event' });
-    });
-  });
 
-router.put('/:id', nopass , (req, res) => {
-    const changes = req.body;
-  
-    Events.update(req.params.id,changes)
-    .then(event => {
-      if (event) {
-        res.status(200).json(event);
-      } else {
-        res.status(404).json({ message: 'Could not find event with given id' });
-      }
-    })
-    .catch(err => {
-      res.status(500).json({ message: 'Failed to update event'});
-    });
-  });
-
-  
-router.delete('/:id', nopass , (req, res) => {
+// Delete an Event
+router.delete('/deleteevent/:id', nopass, (req, res) => {
     const { id } = req.params;
   
     Events.remove(id)
-    .then(count => {
-      if (count) {
-        res.json({ removed: count });
+    .then(deleted => {
+      if (deleted) {
+        res.json({ removed: deleted });
       } else {
         res.status(404).json({ message: 'Could not find event with given id' });
       }
@@ -77,5 +86,26 @@ router.delete('/:id', nopass , (req, res) => {
     });
   });
 
- 
-  module.exports = router;
+  // update an event 
+  router.put('/updateevent/:id', (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
+  
+    Events.findById(id)
+    .then(event => {
+      if (event) {
+        Events.update(changes, id)
+        .then(updatedEvent => {
+          res.json(updatedEvent);
+        });
+      } else {
+        res.status(404).json({ message: 'Could not find event with given id!' });
+      }
+    })
+    .catch (err => {
+      res.status(500).json({ message: 'Failed to update event!' });
+    });
+  });
+
+
+module.exports = router; 
