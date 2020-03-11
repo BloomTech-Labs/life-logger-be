@@ -13,7 +13,7 @@ type Event {
   description: String!
   location: Location
   category: String! @default(value: "uncategorized")
-  createdBy: User!
+  createdBy: User
   createdAt: DateTime! @createdAt
   startsAt: DateTime
   endsAt: DateTime

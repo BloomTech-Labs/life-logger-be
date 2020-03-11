@@ -27,7 +27,7 @@ type Event {
   description: String!
   location: Location
   category: String!
-  createdBy: User!
+  createdBy: User
   createdAt: DateTime!
   startsAt: DateTime
   endsAt: DateTime
@@ -45,7 +45,7 @@ input EventCreateInput {
   description: String!
   location: LocationCreateOneInput
   category: String
-  createdBy: UserCreateOneWithoutEventsInput!
+  createdBy: UserCreateOneWithoutEventsInput
   startsAt: DateTime
   endsAt: DateTime
 }
@@ -206,7 +206,7 @@ input EventUpdateInput {
   description: String
   location: LocationUpdateOneInput
   category: String
-  createdBy: UserUpdateOneRequiredWithoutEventsInput
+  createdBy: UserUpdateOneWithoutEventsInput
   startsAt: DateTime
   endsAt: DateTime
 }
@@ -637,10 +637,12 @@ input UserUpdateManyMutationInput {
   email: String
 }
 
-input UserUpdateOneRequiredWithoutEventsInput {
+input UserUpdateOneWithoutEventsInput {
   create: UserCreateWithoutEventsInput
   update: UserUpdateWithoutEventsDataInput
   upsert: UserUpsertWithoutEventsInput
+  delete: Boolean
+  disconnect: Boolean
   connect: UserWhereUniqueInput
 }
 

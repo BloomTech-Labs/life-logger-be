@@ -11,9 +11,12 @@ type Mutation {
   createUser(username: String!, password: String!, email: String!): User!
   updateUser(id: ID!, username: String, password: String, email: String): User!
   deleteUser(id: ID!): User!
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
   createEvent(
     title: String!, description: String!,
     location: String, category: String,
+    createdBy: String,
   ): Event!
   # createEvent(
   #   title: String!, description: String!,
@@ -38,10 +41,15 @@ type Event {
   description: String!
   category: String!
   location: Location
-  createdBy: User!
+  createdBy: User
   createdAt: String!
   startsAt: String
   endsAt: String
+}
+
+type AuthPayload {
+  token: String
+  user: User
 }
 
 type Location {

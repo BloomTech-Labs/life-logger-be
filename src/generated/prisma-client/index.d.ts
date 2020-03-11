@@ -222,7 +222,7 @@ export interface EventUpdateInput {
   description?: Maybe<String>;
   location?: Maybe<LocationUpdateOneInput>;
   category?: Maybe<String>;
-  createdBy?: Maybe<UserUpdateOneRequiredWithoutEventsInput>;
+  createdBy?: Maybe<UserUpdateOneWithoutEventsInput>;
   startsAt?: Maybe<DateTimeInput>;
   endsAt?: Maybe<DateTimeInput>;
 }
@@ -348,7 +348,7 @@ export interface EventCreateInput {
   description: String;
   location?: Maybe<LocationCreateOneInput>;
   category?: Maybe<String>;
-  createdBy: UserCreateOneWithoutEventsInput;
+  createdBy?: Maybe<UserCreateOneWithoutEventsInput>;
   startsAt?: Maybe<DateTimeInput>;
   endsAt?: Maybe<DateTimeInput>;
 }
@@ -613,10 +613,12 @@ export interface UserUpdateWithoutEventsDataInput {
   email?: Maybe<String>;
 }
 
-export interface UserUpdateOneRequiredWithoutEventsInput {
+export interface UserUpdateOneWithoutEventsInput {
   create?: Maybe<UserCreateWithoutEventsInput>;
   update?: Maybe<UserUpdateWithoutEventsDataInput>;
   upsert?: Maybe<UserUpsertWithoutEventsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
