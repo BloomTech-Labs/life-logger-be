@@ -29,13 +29,13 @@ To get the server running locally:
 
 #### Events Routes
 
-| Method | Endpoint          | Access Control | Description                             |
-| ------ | ----------------- | -------------- | --------------------------------------- |
-| GET    | `/api/events`     | all events     | Returns all events in the evenst table. |
-| GET    | `/api/events/:id` | owners         | Get event by event id.                  |
-| POST   | `/api/events`     | owners         | Add a new events.                       |
-| PUT    | `/api/events/:id` | owners         | Update an new event.                    |
-| DELETE | `/api/events/:id` | owners         | Delete an event.                        |
+| Method | Endpoint                            | Access Control                          | Description                             |                                 
+| ------ | ----------------- | --------------  | --------------------------------------- |                                         |
+| GET    | `/api/events`     | all events      | Returns all events in the evenst table. |                                         |
+| GET    | `/api/events/findbyid/:event_id`    | owners                                  | Get event by event id.                  |
+| POST   | `/api/events/insertevents`          | owners                                  | Add a new events.                       |
+| PUT    | `/api/events/updateevent/:id      ` | owners                                  | Update an new event.                    |
+| DELETE | `/api/events/deleteevent/:event_id` | owners                                  | Delete an event.                        |
 
 #### Users Routes
 
