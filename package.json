@@ -8,11 +8,14 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon index.js",
-    "test": "cross-env DB_ENV=testing jest --watch",
-    "start": "node index.js"
+    "test": "cross-env DB_ENV=testing jest --coverage --watch",
+    "start": "node index.js",
+    "coverage": "jest --coverage --detectOpenHandles --forceExit || true"
   },
   "jest": {
-    "testEnvirnoment": "node"
+
+    "testEnvironment": "node"
+
   },
   "repository": {
     "type": "git",
