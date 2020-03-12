@@ -64,7 +64,7 @@ router.post('/insertevents', nopass, (req, res) => {
       res.status(201).json(event);
     })
     .catch (err => {
-      res.status(500).json({ message: 'Failed to create new event!' });
+      res.status(500).json({ message: 'Failed to create new event!', err });
     });
   });
 
