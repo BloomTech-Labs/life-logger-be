@@ -26,7 +26,15 @@ router.get(
     const { event_id } = req.params;
     Events.findById(event_id)
       .then(event => {
-        res.json(event);
+        if (event) {
+          res.status(200).json(event);
+        } else {
+          res
+            .status(400)
+            .json({
+              message: 'Could not find event with given id'
+            });
+        }
       })
       .catch(err => {
         console.log(err);
@@ -87,8 +95,7 @@ router.delete(
           res.status(200).json({ removed: deleted });
         } else {
           res.status(400).json({
-            message: 'Could not find event with given id',
-            err
+            message: 'Could not find event with given id'
           });
         }
       })
