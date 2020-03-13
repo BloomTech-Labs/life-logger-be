@@ -5,7 +5,7 @@
 
 # API Documentation
 
-#### Backend deployed at [Heroku](https://production-life-logger-be.herokuapp.com/) <br>
+#### Backend deployed at [Heroku]( https://lyfe-logger-be.herokuapp.com//) <br>
 
 ## Getting started
 
@@ -13,7 +13,7 @@ To get the server running locally:
 
 - Clone this repo
 - **npm install** to install all required dependencies
-- **npm start** to start the local server
+- **npm run server** to start the local server
 - **npm test** to start server using testing environment
 
 ### Backend framework goes here
@@ -29,20 +29,21 @@ To get the server running locally:
 
 #### Events Routes
 
-| Method | Endpoint                            | Access Control                          | Description                             |                                 
-| ------ | ----------------- | --------------  | --------------------------------------- |                                         |
-| GET    | `/api/events`     | all events      | Returns all events in the evenst table. |                                         |
-| GET    | `/api/events/findbyid/:event_id`    | owners                                  | Get event by event id.                  |
-| POST   | `/api/events/insertevents`          | owners                                  | Add a new events.                       |
-| PUT    | `/api/events/updateevent/:id      ` | owners                                  | Update an new event.                    |
-| DELETE | `/api/events/deleteevent/:event_id` | owners                                  | Delete an event.                        |
+
+| Method |               Endpoint             | Access Control |              Description               |
+| ------ | ---------------------------------- | ------------   | -------------------------------------- |
+| GET    | `/api/events`                      | all events     | Returns all events in the events table.|
+| GET    | `/api/events/findbyid/:event_id`   | owners         | Get event by event id.                 |
+| POST   | `/api/events/insertevents`         | owners         | Add a new events.                      |
+| PUT    | `/api/events/updateevent/:id`      | owners         | Update an new event.                   |
+| DELETE | `/api/events/deleteevent/:event_id`| owners         | Delete an event.                       |
 
 #### Users Routes
 
-| Method | Endpoint             | Access Control | Description          |
+| Method | Endpoint             | Access Control |     Description      |
 | ------ | -------------------- | -------------- | -------------------- |
-| POST   | `/api/auth/register` | all users      | register a new user. |
-| GOST   | `/api/auth/login`    | all users      | Login                |
+| POST   | `/api/auth/register` | all users      | Register a new user. |
+| POST   | `/api/auth/login`    | all users      | Login                |
 
 
 # Data Model
@@ -53,17 +54,17 @@ To get the server running locally:
 
 ```
 {
-   Event_ID serial PRIMARY KEY,
-   User_ID integer NOT NULL,
-   Title VARCHAR (50),	
-   Event_Text VARCHAR (250),	
-   Location VARCHAR (50),
-   Category integer,
-   Event_Dt_Tm TIMESTAMP,
-   Event_St_Tm TIMESTAMP,
-   Event_Et_Tm TIMESTAMP,
-   All_Day BOOLEAN,
-   Event_resource VARCHAR (250)
+   event_id serial PRIMARY KEY,
+   user_id integer NOT NULL,
+   title VARCHAR (50),	
+   event_text VARCHAR (250),	
+   location VARCHAR (50),
+   category integer,
+   event_ct_tm TIMESTAMP,
+   event_st_tm TIMESTAMP,
+   event_et_tm TIMESTAMP,
+   all_day BOOLEAN,
+   event_resource VARCHAR (250)
 }
 ```
 
@@ -130,4 +131,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](https://github.com/Lambda-School-Labs/life-logger-fe/blob/master/README.md) for details on the fronend of our project.
+See [Frontend Documentation](https://github.com/Lambda-School-Labs/life-logger-fe/blob/master/README.md) for details on the frontend of our project.
