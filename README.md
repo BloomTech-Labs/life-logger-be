@@ -13,7 +13,7 @@ To get the server running locally:
 
 - Clone this repo
 - **npm install** to install all required dependencies
-- **npm start** to start the local server
+- **npm run server** to start the local server
 - **npm test** to start server using testing environment
 
 ### Backend framework goes here
@@ -42,7 +42,7 @@ To get the server running locally:
 | Method | Endpoint             | Access Control | Description          |
 | ------ | -------------------- | -------------- | -------------------- |
 | POST   | `/api/auth/register` | all users      | register a new user. |
-| GOST   | `/api/auth/login`    | all users      | Login                |
+| POST   | `/api/auth/login`    | all users      | Login                |
 
 
 # Data Model
@@ -130,4 +130,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](https://github.com/Lambda-School-Labs/life-logger-fe/blob/master/README.md) for details on the fronend of our project.
+See [Frontend Documentation](https://github.com/Lambda-School-Labs/life-logger-fe/blob/master/README.md) for details on the frontend of our project.
