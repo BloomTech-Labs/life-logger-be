@@ -5,7 +5,7 @@
 
 # API Documentation
 
-#### Backend deployed at [Heroku](https://production-life-logger-be.herokuapp.com/) <br>
+#### Backend deployed at [Heroku]( https://lyfe-logger-be.herokuapp.com//) <br>
 
 ## Getting started
 
