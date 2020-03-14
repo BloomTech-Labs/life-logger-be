@@ -45,18 +45,18 @@ describe('POST', ()=> {
 //events end point test
 describe('GET', ()=> {
     describe('GET', ()=>{
-        it('return a 404 OK', ()=>{
+        it('return a 400 OK', ()=>{
             return request(server)
             .get('/api/events')
             .then(res => {
-                expect(res.status).toBe(404)
+                expect(res.status).toBe(400)
             })
         })
         it('JSON response', ()=>{
             return request(server)
             .get('/api/events')
             .then(res => {
-                expect(res.type).toMatch('text/html')
+                expect(res.type).toMatch('application/json')
             })  
          })  
     })
@@ -65,11 +65,11 @@ describe('GET', ()=> {
 // events end point test one event
 describe('GET', ()=> {
     describe('GET', ()=>{
-        it('return a 404 OK', ()=>{
+        it('return a 400 OK', ()=>{
             return request(server)
             .get('/api/events/findbyid/1')
             .then(res => {
-                expect(res.status).toBe(404)
+                expect(res.status).toBe(400)
             })
         })
         it('JSON response', ()=>{
@@ -105,18 +105,18 @@ describe('POST', ()=> {
 // events end point test update event
 describe('PUT', ()=> {
     describe('PUT', ()=>{
-        it('return a 404 OK', ()=>{
+        it('return a 500 OK', ()=>{
             return request(server)
             .put('/api/events/updateevent/1')
             .then(res => {
-                expect(res.status).toBe(404)
+                expect(res.status).toBe(500)
             })
         })
         it('JSON response', ()=>{
             return request(server)
             .put('/api/events/updateevent/1')
             .then(res => {
-                expect(res.type).toMatch('text/html')
+                expect(res.type).toMatch('application/json')
             })  
          })  
     })
@@ -136,7 +136,7 @@ describe('DELETE', ()=> {
             return request(server)
             .delete('/api/events/deleteevent/1')
             .then(res => {
-                expect(res.type).toMatch('text/html')
+                expect(res.type).toMatch('application/json')
             })  
          })  
     })
