@@ -2,12 +2,9 @@ const server = require("./api/server.js");
 
 const request = require("supertest");
 
-//const db = require("./data/dbConfig");
-
-
 // login end point test
 describe('POST', ()=> {
-    describe('GET', ()=>{
+    describe('POST', ()=>{
         it('return a 404 OK', ()=>{
             return request(server)
             .get('/api/auth/login')
@@ -27,7 +24,7 @@ describe('POST', ()=> {
 
 // register end point test
 describe('POST', ()=> {
-    describe('GET', ()=>{
+    describe('POST', ()=>{
         it('return a 404 OK', ()=>{
             return request(server)
             .get('/api/auth/register')
@@ -37,7 +34,7 @@ describe('POST', ()=> {
         })
         it('JSON response', ()=>{
             return request(server)
-            .get('/api/auth/register')
+            .post('/api/auth/register')
             .then(res => {
                 expect(res.type).toMatch('text/html')
             })  
@@ -70,7 +67,7 @@ describe('GET', ()=> {
     describe('GET', ()=>{
         it('return a 404 OK', ()=>{
             return request(server)
-            .get('/api/events/1')
+            .get('/api/events/findbyid/1')
             .then(res => {
                 expect(res.status).toBe(404)
             })
@@ -78,6 +75,66 @@ describe('GET', ()=> {
         it('JSON response', ()=>{
             return request(server)
             .get('/api/events/1')
+            .then(res => {
+                expect(res.type).toMatch('text/html')
+            })  
+         })  
+    })
+})
+
+// events end point test add event
+describe('POST', ()=> {
+    describe('POST', ()=>{
+        it('return a 404 OK', ()=>{
+            return request(server)
+            .post('/api/events/1')
+            .then(res => {
+                expect(res.status).toBe(404)
+            })
+        })
+        it('JSON response', ()=>{
+            return request(server)
+            .post('/api/events')
+            .then(res => {
+                expect(res.type).toMatch('text/html')
+            })  
+         })  
+    })
+})
+
+// events end point test update event
+describe('PUT', ()=> {
+    describe('PUT', ()=>{
+        it('return a 404 OK', ()=>{
+            return request(server)
+            .put('/api/events/updateevent/1')
+            .then(res => {
+                expect(res.status).toBe(404)
+            })
+        })
+        it('JSON response', ()=>{
+            return request(server)
+            .put('/api/events/updateevent/1')
+            .then(res => {
+                expect(res.type).toMatch('text/html')
+            })  
+         })  
+    })
+})
+
+// events end point test delete event
+describe('DELETE', ()=> {
+    describe('DELETE', ()=>{
+        it('return a 404 OK', ()=>{
+            return request(server)
+            .put('/api/events/1')
+            .then(res => {
+                expect(res.status).toBe(404)
+            })
+        })
+        it('JSON response', ()=>{
+            return request(server)
+            .delete('/api/events/deleteevent/1')
             .then(res => {
                 expect(res.type).toMatch('text/html')
             })  
