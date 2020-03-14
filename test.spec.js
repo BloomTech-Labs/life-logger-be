@@ -87,7 +87,7 @@ describe('POST', ()=> {
     describe('POST', ()=>{
         it('return a 404 OK', ()=>{
             return request(server)
-            .post('/api/events/1')
+            .post('/api/events')
             .then(res => {
                 expect(res.status).toBe(404)
             })
