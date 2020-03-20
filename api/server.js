@@ -14,7 +14,11 @@ const server = express();
 server.use(helmet());
 server.use(
   cors({
-    origin: ['http://localhost:3000'],
+    origin: [
+      'http://localhost:3000',
+      'https://lyfe-logger-fe.herokuapp.com',
+      'https://lyfe-logger.com'
+    ],
     credentials: true
   })
 );
