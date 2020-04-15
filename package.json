@@ -13,9 +13,7 @@
     "coverage": "jest --coverage --detectOpenHandles --forceExit || true"
   },
   "jest": {
-
     "testEnvironment": "node"
-
   },
   "repository": {
     "type": "git",
