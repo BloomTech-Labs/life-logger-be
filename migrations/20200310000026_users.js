@@ -27,7 +27,7 @@ exports.up = function(knex) {
         .defaultTo(knex.fn.now());
       table.boolean('all_day');
       table.string('event_resource');
-      table.boolean('iscomplete');
+      table.boolean('iscomplete').defaultTo(false);
     });
 };
 

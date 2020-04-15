@@ -11,7 +11,7 @@ exports.seed = function(knex) {
       event_et_tm: '2020-02-29 19:10:25-07',
       all_day: true,
       event_resource: 'test',
-      iscomplete: true
+      iscomplete: false
     },
     {
       user_id: 2,
@@ -24,7 +24,7 @@ exports.seed = function(knex) {
       event_et_tm: '2020-02-29 19:10:25-07',
       all_day: true,
       event_resource: 'test',
-      iscomplete: true
+      iscomplete: false
     },
     {
       user_id: 3,
@@ -37,7 +37,7 @@ exports.seed = function(knex) {
       event_et_tm: '2020-02-29 19:10:25-07',
       all_day: false,
       event_resource: 'test',
-      iscomplete: true
+      iscomplete: false
     }
   ]);
 };
