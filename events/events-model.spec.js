@@ -1,6 +1,4 @@
 const Events = require('./events-model.js');
-<<<<<<< HEAD
-<<<<<<< HEAD
 const db = require('../database/dbConfig.js');
 
 // describe('events-model', () => {
@@ -11,10 +9,7 @@ const db = require('../database/dbConfig.js');
 //         })
 //     })
 // })
-=======
-=======
->>>>>>> 7195c588e860c56c99e89f47c9a915cd9ed7dc48
-const db = require('../data/dbConfig.js');
+
 
 const server = require("../api/server.js");
 
@@ -80,6 +75,7 @@ describe('POST', ()=> {
     })
 })
 
+
 // events end point test update event
 describe('PUT', ()=> {
     describe('PUT', ()=>{
@@ -118,9 +114,9 @@ describe('DELETE', ()=> {
             })  
          })  
     })
-<<<<<<< HEAD
+
 })
->>>>>>> 7195c588e860c56c99e89f47c9a915cd9ed7dc48
-=======
-})
->>>>>>> 7195c588e860c56c99e89f47c9a915cd9ed7dc48
+
+
+
+
