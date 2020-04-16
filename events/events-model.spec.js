@@ -54,7 +54,7 @@ describe('GET', ()=> {
          })  
     })
 })
-
+//*************  NEEDS TO BE 404  **************
 // events end point test add event
 describe('POST', ()=> {
     describe('POST', ()=>{
@@ -75,7 +75,7 @@ describe('POST', ()=> {
     })
 })
 
-
+//*************  NEEDS TO BE 404  **************
 // events end point test update event
 describe('PUT', ()=> {
     describe('PUT', ()=>{
