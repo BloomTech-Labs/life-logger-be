@@ -1,5 +1,5 @@
 const Events = require('./events-model.js');
-const db = require('../database/dbConfig.js');
+const db = require('../data/dbConfig.js');
 
 // describe('events-model', () => {
 //     describe('find', () => {
@@ -18,11 +18,11 @@ const request = require("supertest");
 //events end point test
 describe('GET', ()=> {
     describe('GET', ()=>{
-        it('return a 400 OK', ()=>{
+        it('return a 500 OK', ()=>{
             return request(server)
             .get('/api/events')
             .then(res => {
-                expect(res.status).toBe(400)
+                expect(res.status).toBe(500)
             })
         })
         it('JSON response', ()=>{
@@ -49,7 +49,7 @@ describe('GET', ()=> {
             return request(server)
             .get('/api/events/1')
             .then(res => {
-                expect(res.type).toMatch('text/html')
+                expect(res.type).toMatch('application/json')
             })  
          })  
     })
@@ -58,18 +58,18 @@ describe('GET', ()=> {
 // events end point test add event
 describe('POST', ()=> {
     describe('POST', ()=>{
-        it('return a 404 OK', ()=>{
+        it('return a 500 OK', ()=>{
             return request(server)
             .post('/api/events')
             .then(res => {
-                expect(res.status).toBe(404)
+                expect(res.status).toBe(500)
             })
         })
         it('JSON response', ()=>{
             return request(server)
             .post('/api/events')
             .then(res => {
-                expect(res.type).toMatch('text/html')
+                expect(res.type).toMatch('application/json')
             })  
          })  
     })
@@ -99,11 +99,11 @@ describe('PUT', ()=> {
 // events end point test delete event
 describe('DELETE', ()=> {
     describe('DELETE', ()=>{
-        it('return a 404 OK', ()=>{
+        it('return a 500 OK', ()=>{
             return request(server)
             .put('/api/events/1')
             .then(res => {
-                expect(res.status).toBe(404)
+                expect(res.status).toBe(500)
             })
         })
         it('JSON response', ()=>{
