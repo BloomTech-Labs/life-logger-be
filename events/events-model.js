@@ -2,6 +2,7 @@ const db = require('../data/dbConfig.js');
 
 module.exports = {
 <<<<<<< HEAD
+<<<<<<< HEAD
     find,
     findBy,
     findById,
@@ -41,6 +42,8 @@ function findById(id) {
         return db('events').where({id}).del()
     }
 =======
+=======
+>>>>>>> 7195c588e860c56c99e89f47c9a915cd9ed7dc48
   find,
   findBy,
   findById,
@@ -83,4 +86,7 @@ function update(id, changes) {
 function remove(id) {
   return db('events').where({ id }).del();
 }
+<<<<<<< HEAD
+>>>>>>> 7195c588e860c56c99e89f47c9a915cd9ed7dc48
+=======
 >>>>>>> 7195c588e860c56c99e89f47c9a915cd9ed7dc48

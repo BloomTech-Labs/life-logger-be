@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 const express = require('express');
 
 const Events = require('./events-model.js');
@@ -80,6 +81,8 @@ router.get('/', (req, res) => {
   module.exports = router;
 
 =======
+=======
+>>>>>>> 7195c588e860c56c99e89f47c9a915cd9ed7dc48
 const router = require('express').Router();
 
 const Events = require('./events-model.js');
@@ -216,4 +219,7 @@ router.put('/updateevent/:id', (req, res) => {
 });
 
 module.exports = router;
+<<<<<<< HEAD
+>>>>>>> 7195c588e860c56c99e89f47c9a915cd9ed7dc48
+=======
 >>>>>>> 7195c588e860c56c99e89f47c9a915cd9ed7dc48
