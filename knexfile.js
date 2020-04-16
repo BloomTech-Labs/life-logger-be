@@ -2,7 +2,6 @@
 require('dotenv').config();
 
 module.exports = {
-
   development: {
     client: 'pg',
     useNullDefault: true,
@@ -17,40 +16,28 @@ module.exports = {
 
   staging: {
     client: 'postgresql',
-    connection: {
-      database: process.env.DATABASE_URL,
-      user:     'username',
-      password: 'password' 
-    },
-    pool: {
-      afterCreate: (conn, done) => {
-        conn.run('PRAGMA foreign_keys = ON', done);
-    },
+    connection: process.env.DATABASE_URL,
     migrations: {
-      tableName: 'knex_migrations'
+      directory: './migrations'
+    },
+    seeds: {
+      directory: './seeds'
     }
   },
 
   production: {
     client: 'postgresql',
-    connection: {
-      database: process.env.DATABASE_URL,
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      afterCreate: (conn, done) => {
-        conn.run('PRAGMA foreign_keys = ON', done);
-    },
+    connection: process.env.DATABASE_URL,
     migrations: {
-      tableName: 'knex_migrations'
-     }
+      directory: './migrations'
+    },
+    seeds: {
+      directory: './seeds'
     }
-  }
-},
+  },
 
   testing: {
-    client: "pg",
+    client: 'pg',
     connection: {
       host: process.env.POSTGRESS_DEV_HOST,
       port: process.env.POSTGRESS_DEV_PORT,
@@ -59,11 +46,11 @@ module.exports = {
       database: process.env.POSTGRESS_DEV_DATABASE
     },
     migrations: {
-      directory: "./migrations"
+      directory: './migrations'
     },
     seeds: {
-      directory: "./seeds"
+      directory: './seeds'
     },
     useNullAsDefault: true
-      }
-    }
+  }
+};

@@ -4,56 +4,87 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 function generateToken(user) {
-  console.log(user)
+  console.log(user);
 
   const payload = {
-  username: user.username,
-  id: user.id,
-};
-const options = {
-  expiresIn: '1d',
-};
-return jwt.sign(payload,'aeaeiouAndSometimesY', options);
-
+    username: user.username,
+    id: user.id
+  };
+  const options = {
+    expiresIn: '1d'
+  };
+  return jwt.sign(payload, 'aeaeiouAndSometimesY', options);
 }
 
 router.post('/register', (req, res) => {
- 
-  //const { username, password } = req.body;
-  const { username, password, email} = req.headers;
-  Users.insert({ username, password: bcrypt.hashSync(password, 8), email })
+  const { username, password, email } = req.body;
+  Users.insert({
+    username,
+    password: bcrypt.hashSync(password, 8),
+    email
+  })
     .then(id => {
-      res.status(201).json({ message: "User registration complete", id });
+      res
+        .status(201)
+        .json({
+          message: 'User registration complete',
+          id
+        });
     })
     .catch(err => {
       console.log(err);
-      res.status(500).json({ message: "Failed to register user!" });
+      res
+        .status(500)
+        .json({ message: 'Failed to register user!' });
     });
 });
 
 router.post('/login', (req, res) => {
- 
-  //const { username, password } = req.body;
-  const { username, password } = req.headers;
-  Users
-    .findByUsername(username)
+  const { username, password } = req.body;
+  Users.findByUsername(username)
     .then(user => {
-      if (user && bcrypt.compareSync(password, user.password)) {
+      if (
+        user &&
+        bcrypt.compareSync(password, user.password)
+      ) {
         const token = generateToken(user);
         res.status(200).json({
-          message: "Login successful!",
+          message: 'Login successful!',
           token,
-          user_id: user.id       
-          
+          user_id: user.id
         });
       } else {
-        res.status(401).json({ message: "Password Incorrect!" });
+        res
+          .status(401)
+          .json({ message: 'Password Incorrect!' });
       }
     })
     .catch(err => {
       console.log(err);
-      res.status(500).json({ message: "Error during login attempt!" });
+      res
+        .status(500)
+        .json({ message: 'Error during login attempt!' });
     });
+});
+
+router.post('/validate-token', (req, res) => {
+  const token = req.headers.authorization;
+  if (token) {
+    jwt.verify(
+      token,
+      'aeaeiouAndSometimesY',
+      (err, decodedToken) => {
+        if (err) {
+          res.status(401).json({ you: 'Access Denied!' });
+        } else {
+          req.user = decodedToken;
+          next();
+        }
+      }
+    );
+  } else {
+    res.status(400).json({ message: 'Token Missing!' });
+  }
 });
 
 module.exports = router;
