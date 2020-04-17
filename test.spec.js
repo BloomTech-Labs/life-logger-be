@@ -41,3 +41,12 @@ describe('POST', ()=> {
          })  
     })
 })
+
+// Testing server
+describe("server.js", () => {
+    describe("GET/", ()=> {
+    it.todo('should return 200 OK');
+    it.todo('should return JSON');
+    it.todo('should respond with { "api: Up and running" }');
+})
+})
