@@ -53,14 +53,17 @@ describe("server.js", () => {
     it('should return JSON', () => {
         return request(server).get("/") 
         .then(res => {
-             expect(res.type).toMatch(/json/i)
+            expect(res.type).toBe("application/json")
         })
      });
  
-
-
-    it.todo('should respond with { "api: Up and running" }');
-    })
+     it('should respond with { "api: Up and running" }', () => {
+        return request(server)
+        .get("/") 
+        .then(res => {
+             expect(res.body.api).toBe("Up and running")
+        })
+    });
+  })
 })
-
 
