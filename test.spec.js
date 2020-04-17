@@ -43,6 +43,8 @@ describe('POST', ()=> {
 })
 
 // Testing server
+
+// status 200
 describe("server.js", () => {
     describe("GET/", ()=> {
     it('should return 200 OK', async() => {
@@ -50,6 +52,7 @@ describe("server.js", () => {
         expect(response.status).toBe(200);
     });
 
+// application/json
     it('should return JSON', () => {
         return request(server).get("/") 
         .then(res => {
@@ -57,6 +60,7 @@ describe("server.js", () => {
         })
      });
  
+// api property in the body
      it('should respond with { "api: Up and running" }', () => {
         return request(server)
         .get("/") 
