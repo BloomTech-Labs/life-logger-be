@@ -42,21 +42,21 @@ describe('POST', ()=> {
     })
 })
 
-// Testing server
+// Testing server:
 
 // status 200
 describe("server.js", () => {
     describe("GET/", ()=> {
     it('should return 200 OK', async() => {
-        const response = await request(server).get("/");
-        expect(response.status).toBe(200);
+        const res = await request(server).get("/");
+        expect(res.status).toBe(200);
     });
 
 // application/json
     it('should return JSON', () => {
         return request(server).get("/") 
         .then(res => {
-            expect(res.type).toBe("application/json")
+            expect(res.type).toMatch(/json/)
         })
      });
  
@@ -68,6 +68,17 @@ describe("server.js", () => {
              expect(res.body.api).toBe("Up and running")
         })
     });
+
+    //environment
+    describe("server", ()=> {
+        describe("environment", () => {
+            it("should use the testing environment", () => {
+                expect(process.env.DB_ENV).toBe("testing")
+            })
+        })
+    })
+
   })
 })
+
 
