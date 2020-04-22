@@ -65,7 +65,7 @@ describe("server.js", () => {
         return request(server)
         .get("/") 
         .then(res => {
-             expect(res.body.api).toBe("Up and running")
+             expect(res.body.api).toEqual("Up and running")
         })
     });
 

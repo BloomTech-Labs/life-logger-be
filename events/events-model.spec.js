@@ -16,6 +16,8 @@ const server = require("../api/server.js");
 const request = require("supertest");
 
 //events end point test
+//*************  NEEDS TO RETURN 400 **************
+
 describe('GET', ()=> {
     describe('GET', ()=>{
         it('return a 500 OK', ()=>{
@@ -75,7 +77,7 @@ describe('POST', ()=> {
     })
 })
 
-//*************  NEEDS TO RETURN 404 **************
+
 // events end point test update event
 describe('PUT', ()=> {
     describe('PUT', ()=>{
