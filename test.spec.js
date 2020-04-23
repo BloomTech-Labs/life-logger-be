@@ -72,16 +72,18 @@ describe("server.js", () => {
         expect(response.body).toEqual(expectedBody);
       });
 
-    //environment
-    describe("server", ()=> {
-        describe("environment", () => {
-            it("should use the testing environment", () => {
-                expect(process.env.DATABASE_ENV).toBe("development")
-            })
-        })
-    })
+
+    // describe("server", ()=> {
+    //     describe("environment", () => {
+    //         it("should use the testing environment", () => {
+    //             expect(process.env.DATABASE_ENV).toBe("testing")
+    //         })
+    //     })
+    // })
 
   })
-})
+ })
+
+ 
 
 
