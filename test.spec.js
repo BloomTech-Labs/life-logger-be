@@ -57,9 +57,6 @@ describe("server.js", () => {
         return request(server).get("/") 
         .then(res => {
             expect(res.type).toMatch(/json/)
-            
-            
-
         })
      });
  
@@ -73,13 +70,13 @@ describe("server.js", () => {
       });
 
 
-    // describe("server", ()=> {
-    //     describe("environment", () => {
-    //         it("should use the testing environment", () => {
-    //             expect(process.env.DATABASE_ENV).toBe("testing")
-    //         })
-    //     })
-    // })
+    describe("server", ()=> {
+        describe("environment", () => {
+            it("should use the testing environment", () => {
+                expect(process.env.DB_ENV).toBe("testing")
+            })
+        })
+    })
 
   })
  })
