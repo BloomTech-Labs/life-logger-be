@@ -57,23 +57,26 @@ describe("server.js", () => {
         return request(server).get("/") 
         .then(res => {
             expect(res.type).toMatch(/json/)
+            
+            
+
         })
      });
  
 // api property in the body
-     it('should respond with { "api: Up and running" }', () => {
-        return request(server)
-        .get("/") 
-        .then(res => {
-             expect(res.body.api).toEqual("Up and running")
-        })
-    });
+    it('should return a JSON object from the index route', async () => {
+        const expectedBody = { api: "Up and running" };
+  
+        const response = await request(server).get('/');
+  
+        expect(response.body).toEqual(expectedBody);
+      });
 
     //environment
     describe("server", ()=> {
         describe("environment", () => {
             it("should use the testing environment", () => {
-                expect(process.env.DB_ENV).toBe("testing")
+                expect(process.env.DATABASE_ENV).toBe("development")
             })
         })
     })
