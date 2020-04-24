@@ -1,6 +1,10 @@
-const server = require("./api/server.js");
+const server = require('./api/server.js');
 
-const request = require("supertest");
+const request = require('supertest');
+
+afterAll(async () => {
+	await new Promise(resolve => setTimeout(() => resolve(), 500)); // avoid jest open handle error
+});
 
 // login end point test
 describe('POST', ()=> {
@@ -45,38 +49,36 @@ describe('POST', ()=> {
 // Testing server:
 
 // status 200
-describe("server.js", () => {
-    describe("GET/", ()=> {
+describe('server.js', () => {
+    describe('GET/', ()=> {
     it('should return 200 OK', async() => {
-        const res = await request(server).get("/");
+        const res = await request(server).get('/');
         expect(res.status).toBe(200);
     });
 
 // application/json
     it('should return JSON', () => {
-        return request(server).get("/") 
+        return request(server).get('/') 
         .then(res => {
             expect(res.type).toMatch(/json/)
         })
      });
  
 // api property in the body
-    it('should return a JSON object from the index route', async () => {
-        const expectedBody = { api: "Up and running" };
-  
-        const response = await request(server).get('/');
-  
-        expect(response.body).toEqual(expectedBody);
+    it('should return a JSON object from the index route', async() => {
+        const expectedBody = { api: 'Up and running' };
+        const res = await request(server).get('/');
+        expect(res.body).toEqual(expectedBody); 
       });
 
-
-    describe("server", ()=> {
-        describe("environment", () => {
-            it("should use the testing environment", () => {
-                expect(process.env.DB_ENV).toBe("testing")
-            })
-        })
-    })
+      
+    // describe('server', ()=> {
+    //     describe('environment', () => {
+    //         it('should use the testing environment', () => {
+    //             expect(process.env.DB_ENV).toBe('testing')
+    //         })
+    //     })
+    // })
 
   })
  })
