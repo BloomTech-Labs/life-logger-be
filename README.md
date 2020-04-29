@@ -32,7 +32,7 @@ After starting the server open http://localhost:4000 on the browser tab. You wil
 * login
 * createEvent
 
-Please open DOCS pane on localhost tab to see detailed Documentation.
+Please open DOCS pane on localhost tab to see detailed Query and Mutations requirements.
     
 ## Contributing
 
