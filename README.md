@@ -1,5 +1,4 @@
-GRADE BADGE
-https://api.codeclimate.com/v1/badges/0915a297bde344a86b20/maintainability
+[![Maintainability](https://api.codeclimate.com/v1/badges/0915a297bde344a86b20/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/life-logger-be/maintainability)
 
 This is GraphQL server created using graphql-yoga and Prisma for database access. Demo database used to store API data.
 
