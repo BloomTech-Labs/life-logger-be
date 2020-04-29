@@ -1,26 +1,39 @@
 GRADE BADGE
 https://api.codeclimate.com/v1/badges/0915a297bde344a86b20/maintainability
 
+This is GraphQL server created using graphql-yoga and Prisma for database access. Demo database used to store API data.
+
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
-
-## 1️⃣ Getting started
+## Getting started
 
 To get the server running locally:
-
 - Clone this repo
-- **install prisma globally** 
-- **yarn install** to install all required dependencies
-- **or npm install** if you use npm
-- **yarn server** to start the local server
+- **install prisma globally** - this is optional, you want generate prisma client yourself or make changes in deployed service.
+- **yarn install** **or npm install** to install all required dependencies
+- **yarn start** to start the local server
 - **yarn test** to start server using testing environment
 
-### Backend framework goes here
+### Prisma client delpoyed at [Prisma cloud](https://us1.prisma.sh/life-logger/life-logger-be/dev). If you want to learn more about setting up Prisma check documentation [here](https://v1.prisma.io/docs/1.34/get-started/).
 
-instructions of how to interact with this api:
-**goes here**
+### instructions of how to interact with this api:
+After starting the server open http://localhost:4000 on the browser tab. You will see GraphQL Playground. By clicking the DOCS-button on the right, you can open the API documentation
 
+**QUERIES:**
+  * allUsers
+  * user
+  * event
+  * info: String!
+
+**MUTATIONS:**
+* createUser
+* updateUser
+* deleteUser
+* signup
+* login
+* createEvent
+
+Please open DOCS pane on localhost tab to see detailed Documentation.
     
 ## Contributing
 
@@ -60,4 +73,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
+See [LifeLogger](https://github.com/Lambda-School-Labs/life-logger-fe) for details on the fronend of our project.
