@@ -5,6 +5,7 @@ const server = require('../api/server.js');
 
 const request = require('supertest');
 
+// mock the authentication middleware so we can test what's actually in the endpoint
 const authenticate = require('../auth/authenticate-middleware');
 jest.mock('../auth/authenticate-middleware');
 
@@ -16,6 +17,7 @@ describe('GET', () => {
 
             const res = await request(server).get('/api/events');
 
+            // expect it to be an error because we didn't pass a token into the request
             expect(res.status).toBe(400);
         });
 
@@ -23,6 +25,7 @@ describe('GET', () => {
             authenticate.mockImplementation((req, res, next) => next());
             const res = await request(server).get('/api/events');
 
+            // expect it to be an error because we didn't pass a token into the request
             expect(res.type).toMatch('application/json');
         });
     });
@@ -35,6 +38,7 @@ describe('GET', () => {
             authenticate.mockImplementation((req, res, next) => next());
             const res = await request(server).get('/api/events/findbyid/1');
 
+            // expect it to be an error because we didn't pass a token into the request
             expect(res.status).toBe(500);
         });
 
@@ -42,6 +46,7 @@ describe('GET', () => {
             authenticate.mockImplementation((req, res, next) => next());
             const res = await request(server).get('/api/events/findbyid/1');
 
+            // expect it to be an error because we didn't pass a token into the request
             expect(res.type).toMatch('application/json');
         });
     });
@@ -54,6 +59,7 @@ describe('POST', () => {
             authenticate.mockImplementation((req, res, next) => next());
             const res = await request(server).post('/api/events/insertevents');
 
+            // expect it to be an error because we didn't pass a token into the request
             expect(res.status).toBe(500);
         });
 
@@ -61,6 +67,7 @@ describe('POST', () => {
             authenticate.mockImplementation((req, res, next) => next());
             const res = await request(server).post('/api/events/insertevents');
 
+            // expect it to be an error because we didn't pass a token into the request
             expect(res.type).toMatch('application/json');
         });
     });
@@ -73,6 +80,7 @@ describe('PUT', () => {
             authenticate.mockImplementation((req, res, next) => next());
             const res = await request(server).put('/api/events/updateevent/1');
 
+            // expect it to be an error because we didn't pass a token into the request
             expect(res.status).toBe(500);
         });
 
@@ -80,6 +88,7 @@ describe('PUT', () => {
             authenticate.mockImplementation((req, res, next) => next());
             const res = await request(server).put('/api/events/updateevent/1');
 
+            // expect it to be an error because we didn't pass a token into the request
             expect(res.type).toMatch('application/json');
         });
     });
@@ -94,6 +103,7 @@ describe('DELETE', () => {
                 '/api/events/deleteevent/1'
             );
 
+            // expect it to be an error because we didn't pass a token into the request
             expect(res.status).toBe(500);
         });
 
@@ -103,6 +113,7 @@ describe('DELETE', () => {
                 '/api/events/deleteevent/1'
             );
 
+            // expect it to be an error because we didn't pass a token into the request
             expect(res.type).toMatch('application/json');
         });
     });
