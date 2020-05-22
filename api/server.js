@@ -13,22 +13,22 @@ const server = express();
 
 server.use(helmet());
 server.use(
-  cors({
-    origin: [
-      'http://localhost:3000',
-      'https://lyfe-logger-fe.herokuapp.com',
-      'https://lyfe-logger.com'
-    ],
-    credentials: true
-  })
+    cors({
+        origin: [
+            'http://localhost:3000',
+            'https://lyfe-logger-fe.herokuapp.com',
+            'https://lyfe-logger.com',
+        ],
+        credentials: true,
+    })
 );
 server.use(express.json());
 
 server.use('/api/auth', authRouter);
-server.use('/api/events', eventsRouter);
+server.use('/api/events', authenticate, eventsRouter);
 
 server.get('/', (req, res) => {
-  res.status(200).json({ api: 'Up and running' });
+    res.status(200).json({ api: 'Up and running' });
 });
 
 module.exports = server;
