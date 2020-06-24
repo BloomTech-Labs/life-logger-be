@@ -1,10 +1,6 @@
 // Update with your config settings.
 require('dotenv').config();
 
-console.log(
-  `postgres://${process.env.POSTGRESS_DEV_USER}:${process.env.POSTGRESS_DEV_PASSWORD}@${process.env.POSTGRESS_DEV_HOST}:${process.env.POSTGRESS_DEV_PORT}/${process.env.POSTGRESS_DEV_DATABASE}`
-);
-
 module.exports = {
   development: {
     client: 'pg',
@@ -17,7 +13,6 @@ module.exports = {
     //   database: process.env.POSTGRESS_DEV_DATABASE
     // }
     connection: `postgres://${process.env.POSTGRESS_DEV_USER}:${process.env.POSTGRESS_DEV_PASSWORD}@${process.env.POSTGRESS_DEV_HOST}:${process.env.POSTGRESS_DEV_PORT}/${process.env.POSTGRESS_DEV_DATABASE}`,
-    // "postgres://YourUserName:YourPassword@localhost:5432/YourDatabase";
     migrations: {
       directory: './migrations',
     },
