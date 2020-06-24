@@ -12,8 +12,12 @@ exports.up = function (knex) {
     })
     .createTable('tasks', function (table) {
       table.increments();
-      table.integer('task_id').references('id').inTable('task_names');
-      table.integer('user_id').references('id').inTable('users');
+      table
+        .integer('task_id')
+        .references('id')
+        .inTable('task_names')
+        .notNullable();
+      table.integer('user_id').references('id').inTable('users').notNullable();
       table.string('task_notes');
       table.integer('category_id').references('id').inTable('categories');
       table.datetime('due_date').notNullable();
