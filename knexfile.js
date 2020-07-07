@@ -1,56 +1,43 @@
+
 // Update with your config settings.
-require('dotenv').config();
 
 module.exports = {
+
   development: {
-    client: 'pg',
-    useNullDefault: true,
+    client: "sqlite3",
+    useNullAsDefault: true,
     connection: {
-      host: process.env.POSTGRESS_DEV_HOST,
-      port: process.env.POSTGRESS_DEV_PORT,
-      user: process.env.POSTGRESS_DEV_USER,
-      password: process.env.POSTGRESS_DEV_PASSWORD,
-      database: process.env.POSTGRESS_DEV_DATABASE
-    }
-  },
-
-  staging: {
-    client: 'postgresql',
-    connection: process.env.DATABASE_URL,
+      filename: "./data/profilebook.db3",
+    },
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run("PRAGMA foreign_keys =ON", done);
+      }
+    },
     migrations: {
-      directory: './migrations'
+      directory: "./data/migrations"
     },
     seeds: {
-      directory: './seeds'
+      directory: "./data/seeds"
     }
   },
-
   production: {
-    client: 'postgresql',
-    connection: process.env.DATABASE_URL,
-    migrations: {
-      directory: './migrations'
-    },
-    seeds: {
-      directory: './seeds'
-    }
-  },
+       client: 'pg',
+       useNullAsDefault: true,
+       connection: process.env.DATABASE_URL,
+       pool: {
+         min: 2,
+         max: 10,
+       },
+       migrations: {
+           directory: './data/migrations',
+       },
+       seeds: {
+         directory: './data/seeds',
+       },
+     },
+   
 
-  testing: {
-    client: 'pg',
-    connection: {
-      host: process.env.POSTGRESS_DEV_HOST,
-      port: process.env.POSTGRESS_DEV_PORT,
-      user: process.env.POSTGRESS_DEV_USER,
-      password: process.env.POSTGRESS_DEV_PASSWORD,
-      database: process.env.POSTGRESS_DEV_DATABASE
-    },
-    migrations: {
-      directory: './migrations'
-    },
-    seeds: {
-      directory: './seeds'
-    },
-    useNullAsDefault: true
-  }
-};
+  
+
+}

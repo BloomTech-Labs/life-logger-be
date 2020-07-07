@@ -1,134 +1,358 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/0915a297bde344a86b20/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/life-logger-be/maintainability)
+# LyfeLogger-BE
+A restFul API utilizing node/express/PG/JSON WebTokens
+# **API User Guide**
 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/0915a297bde344a86b20/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/life-logger-be/test_coverage)
+|**Table of Contents:**|
+|-|
+|[Authentication Routes](#Authentication-Routes)| Do Not Require Token
+|[User Routes](#User-Routes)| Do Not Require Token
+|[task Routes](#task-Routes)| Require Token
 
+Tokens Encrypted through Password and Email.
 
-# API Documentation
+### **Authentication Routes**
 
-#### Backend deployed at [Heroku]( https://lyfe-logger-be.herokuapp.com//) <br>
+Server located at: not yet deployed
 
-## Getting started
+###  **User Registration**:
 
-To get the server running locally:
+#### POST */life_logger/auth/users/register*
 
-- Clone this repo
-- **npm install** to install all required dependencies
-- **npm run server** to start the local server
-- **npm test** to start server using testing environment
+Creates a new user account.
+Returns an object with user info and a JSON web token.
 
-### Backend framework goes here
-
-🚫 Why did you choose this framework?
-
--    Point One
--    Point Two
--    Point Three
--    Point Four
-
-## Endpoints
-
-#### Events Routes
-
-
-| Method |               Endpoint             | Access Control |              Description               |
-| ------ | ---------------------------------- | ------------   | -------------------------------------- |
-| GET    | `/api/events`                      | all events     | Returns all events in the events table.|
-| GET    | `/api/events/findbyid/:event_id`   | owners         | Get event by event id.                 |
-| POST   | `/api/events/insertevents`         | owners         | Add a new events.                      |
-| PUT    | `/api/events/updateevent/:id`      | owners         | Update an new event.                   |
-| DELETE | `/api/events/deleteevent/:event_id`| owners         | Delete an event.                       |
-
-#### Users Routes
-
-| Method | Endpoint             | Access Control |     Description      |
-| ------ | -------------------- | -------------- | -------------------- |
-| POST   | `/api/auth/register` | all users      | Register a new user. |
-| POST   | `/api/auth/login`    | all users      | Login                |
-
-
-# Data Model
-
-#### EVENTS
-
----
-
-```
+Request:
+```javascript
 {
-   event_id serial PRIMARY KEY,
-   user_id integer NOT NULL,
-   title VARCHAR (50),	
-   event_text VARCHAR (250),	
-   location VARCHAR (50),
-   category integer,
-   event_ct_tm TIMESTAMP,
-   event_st_tm TIMESTAMP,
-   event_et_tm TIMESTAMP,
-   all_day BOOLEAN,
-   event_resource VARCHAR (250)
+  username: "testinguser1", // string (required), must be unique
+  password: "testing123!", // string (required)
+  email: "testinguser1@mail.gov", // string (required), must be unique
+
+}
+```
+Response:
+
+```javascript
+   "data": {
+        "token": "some_token",
+        "user": {
+            "username": "testinguser1",
+            "email": "testing123!",
+            "id": 1
+        }
+    }
+```
+
+
+
+### **User/ Login** 
+[back to top](#api-user-guide)
+
+
+#### POST */life_logger/auth/users/login*
+
+Validates user's credentials.
+Returns an object with user info and a JSON web token.
+
+Request:
+```javascript
+{
+  username: "firstnamelastname", // string (required)
+  password: "testing123!", // string (required)
 }
 ```
 
-#### USERS
+Response:
+```javascript
+   "data": {
+        "token": "some_token",
+        "user": {
+            "username": "testinguser1",
+            "email": "testing123!",
+            "id": 1
+        }
+    }
+```
 
----
+## **User Routes**
+[back to top](#api-user-guide)
 
+#### GET */life_logger/auth/users/*
+
+Returns an array of users. Available to all users.
+
+Request:
+```javascript
+// No input needed
+```
+Response:
 ```
 {
-  id serial PRIMARY KEY,
-  username VARCHAR (255) UNIQUE NOT NULL,
-  password VARCHAR (255) NOT NULL,
-  email VARCHAR (355) UNIQUE NOT NULL
+    "data": {
+        "users": [
+            {
+                "id": 1,
+                "username": "test1",
+                "password": "test",
+                "email": "test1@test.net"
+            },
+            {
+                "id": 2,
+                "username": "test2",
+                "password": "test",
+                "email": "test2@test.net"
+            },
+            {
+                "id": 3,
+                "username": "test3",
+                "password": "test",
+                "email": "test3@test.net"
+            },
+            {
+                "id": 4,
+                "username": "devinsre",
+                "password": "$2a$12$QPN4.K4Pjr6hUvi7zFEVm.BB6vznHeBckLWExGxqgHCiRZnF4a5Hu",
+                "email": "dev@deve14d"
+            }
+        ]
+    }
+}
+```
+#### GET */life_logger/auth/users/id*
+
+Return a user object at the specified id.
+
+Request:
+```javascript
+// No input needed
+```
+Response:
+```
+{
+    "data": {
+        "user": {
+            "username": "test1",
+            "email": "test1@test.net",
+            "id": 1
+        }
+    }
 }
 ```
 
-## Environment Variables
+#### delete */life_logger/auth/users/id*
 
-create a .env file that includes the following:
+deletes at the specified id.
 
-    *  POSTGRESS_DEV_HOST=localhost
-    *  POSTGRESS_DEV_PORT=5432
-    *  POSTGRESS_DEV_USER=postgres
-    *  POSTGRESS_DEV_PASSWORD=password
-    *  POSTGRESS_DEV_DATABASE=lifelogger_be  
-    *  JWT_SECRET="aeaeiouAndSometimesY"
-   
-    
-## Contributing
+Request:
+```javascript
+// No input needed , gets the ID from slug
+```
+Response:
+```
+status 200 
+no body
+```
 
-When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 
-Please note we have a [code of conduct](./code_of_conduct.md). Please follow it in all your interactions with the project.
 
-### Issue/Bug Request
+#### put */life_logger/auth/users/id*
 
- **If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
- - Check first to see if your issue has already been reported.
- - Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
- - Create a live example of the problem.
- - Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes,  where you believe the issue is originating from, and any potential solutions you have considered.
+Updating a company profile. You must be logged in as owner of the company. Only company_name and description are required, other fields are optional. You cannot modify id, username, password, or user_type
 
-### Feature Requests
+Request:
 
-We would love to hear from you about new features which would improve this app and further the aims of our project. Please provide as much detail and information as possible to show us why you think your new feature should be implemented.
+```javascript
 
-### Pull Requests
+{
+	"username":"thomas",
+	"password": "1234",
+	"email": "dev@devsaefase14dd"
+}
+// none are required. just request to change what you wants specifically
+```
+Response:
+will return user object to show changes
+```javascript
+{
+    "data": {
+        "user": {
+            "username": "thomas",
+            "email": "dev@devsaefase14dd",
+            "id": 7
+        }
+    }
+}
+```
 
-If you have developed a patch, bug fix, or new feature that would improve this app, please submit a pull request. It is best to communicate your ideas with the developers first before investing a great deal of time into a pull request to ensure that it will mesh smoothly with the project.
 
-Remember that this project is licensed under the MIT license, and by submitting a pull request, you agree that your work will be, too.
+## **Task Routes**
+[back to top](#task-Routes)
 
-#### Pull Request Guidelines
+#### GET */life_logger/auth/tasks/*
 
-- Ensure any install or build dependencies are removed before the end of the layer when doing a build.
-- Update the README.md with details of changes to the interface, including new plist variables, exposed ports, useful file locations and container parameters.
-- Ensure that your code conforms to our existing code conventions and test coverage.
-- Include the relevant issue number, if applicable.
-- You may merge the Pull Request in once you have the sign-off of two other developers, or if you do not have permission to do that, you may request the second reviewer to merge it for you.
+Return a list of all tasks in Database
 
-### Attribution
+Request:
+```javascript
+// No input needed
+```
+Response:
+```
+{
+    "data": [
+        {
+            "id": 1,
+            "category_name": "Work",
+            "task_name": "Change AC air filter",
+            "task_notes": "Testing the test.",
+            "due_date": "2020-02-29 19:10:25-07",
+            "all_day": 1,
+            "is_complete": 0,
+	    "user_id": 1
+        },
+        {
+            "id": 2,
+            "category_name": "Home",
+            "task_name": "Change fire alarm batteries",
+            "task_notes": "Testing the test.",
+            "due_date": "2020-03-22 01:10:25-07",
+            "all_day": 1,
+            "is_complete": 0,
+	    "user_id": 2
+        },
+        {
+            "id": 3,
+            "category_name": "Home",
+            "task_name": "Change fire alarm batteries",
+            "task_notes": "Testing the test.",
+            "due_date": "2020-04-22 15:10:25-07",
+            "all_day": 0,
+            "is_complete": 0,
+	    "user_id": 3
+        }
+    ]
+}
+```
+#### GET */life_logger/auth/tasks/findById/user=:user_id/:task_id*
 
-These contribution guidelines have been adapted from [this good-Contributing.md-template](https://gist.github.com/PurpleBooth/b24679402957c63ec426).
+Returns a specific task object for a specific user both by ID
 
-## Documentation
+Request:
+```javascript
+// No input needed.   Comes from Parameters
+```
+Response:
+```
+{
+    "data": [
+        {
+            "id": 1,
+            "category_name": "Work",
+            "task_name": "Change AC air filter",
+            "task_notes": "Testing the test.",
+            "due_date": "2020-02-29 19:10:25-07",
+            "all_day": 1,
+            "is_complete": 0,
+	       "user_id": 1
+	    
 
-See [Frontend Documentation](https://github.com/Lambda-School-Labs/life-logger-fe/blob/master/README.md) for details on the frontend of our project.
+        }
+     
+      
+    ]
+}
+```
+#### GET */life_logger/auth/tasks/findByUserId/:user_id*
+
+Returns a list of task objects for a specific user by ID
+
+Request:
+```javascript
+// No input needed.   Comes from Parameters
+```
+Response:
+```
+{
+    "data": [
+        {
+            "id": 1,
+            "category_name": "Work",
+            "task_name": "Change AC air filter",
+            "task_notes": "Testing the test.",
+            "due_date": "2020-02-29 19:10:25-07",
+            "all_day": 1,
+            "is_complete": 0,
+	       "user_id": 1
+	    
+
+        },
+	 {
+            "id": 1,
+            "category_name": "Work",
+            "task_name": "Change AC air filter",
+            "task_notes": "Testing the test.",
+            "due_date": "2020-02-29 19:10:25-07",
+            "all_day": 1,
+            "is_complete": 0,
+	       "user_id": 1
+	    
+
+        }
+     
+      
+    ]
+}
+```
+
+#### Post */life_logger/auth/tasks/insertTask*
+
+Adds A task Object
+***notes
+the end point will take a task name and category name. it will check both tables to see if they exist. if it exists it will not create a new one but instead use the old one. if it does not exist it will create a new one that can be reused. this along with the joins is whats giving us the ability to use many to many schema in the relational database***
+
+Request:
+```javascript
+{
+"user_id": 1, 
+"task_name": "Change AC air f", 
+"category_name": "Work",
+"due_date": "909g",
+"all_day": 0,
+"task_notes": "salf sf asgf adsga",
+ "is_complete": 0
+}
+```
+Response:
+```
+{
+    "data": [
+        {
+            "id": 16,
+            "task_id": 8,
+            "user_id": 1,
+            "task_notes": "salf sf asgf adsga",
+            "category_id": 5,
+            "due_date": "909g",
+            "all_day": 0,
+            "is_complete": 0
+        }
+    ]
+}
+```
+
+#### Delte */life_logger/auth/tasks/deleteTask/:task_id/:user_id*
+
+deletes A task Object
+***notes
+the end point will take a task name and category name. it will check both tables to see if they exist. if it exists it will not create a new one but instead use the old one. if it does not exist it will create a new one that can be reused. this along with the joins is whats giving us the ability to use many to many schema in the relational database***
+
+Request:
+```javascript
+none => comoes from parameters
+```
+Response:
+```
+{message: "task deleted"}
+```
+
+
