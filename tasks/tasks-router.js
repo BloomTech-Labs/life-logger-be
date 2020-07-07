@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const Tasks = require('./tasks-model.js');
+const TaskNames = require('./task-names-model.js');
 
 // Return a task by user_id and task_id
 router.get('/findById/user=:user_id/:task_id', async (req, res) => {
@@ -33,8 +34,30 @@ router.get('/findByUserId/:user_id', async (req, res) => {
   }
 });
 
+// Insert a new task to `task_names`
+router.post('/newTaskName', async (req, res) => {
+  // check if the body has a task name and user_id
+  // should probably have some middleware to check if the user_id is valid
+  const task = req.body;
+
+  if (!task.name || !task.user_id) {
+    res.status(400).json({ message: 'Must include a name and user_id' });
+  } else {
+    try {
+      // returns an array of the `id` of the newly created `task_name`
+      const response = await TaskNames.createTaskName(task);
+      res.status(201).json({ task_name_id: response[0] });
+    } catch (err) {
+      res.status(500).json({
+        message: 'Failed to create new task!',
+        err,
+      });
+    }
+  }
+});
+
 // Insert a task
-router.post('/insertTask', async (req, res) => {
+router.post('/createTask', async (req, res) => {
   const TaskData = req.body;
 
   if (!TaskData.task_id || !TaskData.user_id || !TaskData.due_date) {
