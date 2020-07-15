@@ -25,11 +25,14 @@ router.get('/findById/user=:user_id/:task_id', async (req, res) => {
 // Return all tasks by user_id
 router.get('/findByUserId/:user_id', async (req, res) => {
   const { user_id } = req.params;
+  console.log('user_id: ', user_id);
 
   try {
+    console.log('in here');
     const tasks = await Tasks.findByUserId(user_id);
     res.status(200).json(tasks);
   } catch (err) {
+    console.log('error here: ', err);
     res.status(500).json({ message: 'Error fetching tasks!', err });
   }
 });
@@ -58,6 +61,10 @@ router.post('/newTaskName', async (req, res) => {
 
 // Insert a task
 router.post('/createTask', async (req, res) => {
+  // need to first check if task name already exists in `task_names` table -- if not, add it
+  // then check if category name already exists in `categories` table -- if not, add it
+  // then add the rest of the necessary data to the `tasks` table
+
   const TaskData = req.body;
 
   if (!TaskData.task_id || !TaskData.user_id || !TaskData.due_date) {
@@ -116,6 +123,10 @@ router.delete('/deleteTask/user=:user_id/:id', async (req, res) => {
 
 // update a task by user_id and id
 router.put('/updateTask/user=:user_id/:id', async (req, res) => {
+  // need to first check if task name already exists in `task_names` table -- if not, add it
+  // then check if category name already exists in `categories` table -- if not, add it
+  // then add the rest of the necessary data to the `tasks` table
+
   const { id, user_id } = req.params;
   const changes = req.body;
 
