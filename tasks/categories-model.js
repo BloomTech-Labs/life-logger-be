@@ -16,16 +16,9 @@ function findBy(filter, user_id) {
 }
 
 // add new category to `categories` table
+// returns back the whole category object
 function createCategory(category) {
-  // lower case taskName before adding it to db
-  const lowercaseName = category.name.toLowerCase();
-
-  const newCategoryName = {
-    name: lowercaseName,
-    user_id: category.user_id,
-  };
-
-  return db('categories').insert(newCategoryName);
+  return db('categories').insert(category).returning(['id', 'name', 'user_id']);
 }
 
 // edit task in `categories` table by the id and user_id

@@ -12,20 +12,15 @@ module.exports = {
 // name
 // user_id -- although this would be redundant
 function findBy(filter, user_id) {
+  console.log('filter: ', filter);
   return db('task_names').where(filter).where({ user_id });
 }
 
 // add new task to `task_names` table
 function createTaskName(task) {
-  // lower case taskName before adding it to db
-  const lowercaseName = task.name.toLowerCase();
+  console.log('task: ', task);
 
-  const newTaskName = {
-    name: lowercaseName,
-    user_id: task.user_id,
-  };
-
-  return db('task_names').insert(newTaskName);
+  return db('task_names').insert(task).returning(['id', 'name', 'user_id']);
 }
 
 // edit task in `task_names` table by the id and user_id
