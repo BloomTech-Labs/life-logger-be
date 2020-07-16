@@ -2,15 +2,16 @@ const router = require('express').Router();
 
 const Tasks = require('./tasks-model.js');
 const TaskNames = require('./task-names-model.js');
+const Categories = require('./categories-model');
 
-// Return a task by user_id and task_id
+// Return a task by user_id and task id (not the task_id tied to the task_names table)
 router.get('/findById/user=:user_id/:task_id', async (req, res) => {
   const { task_id, user_id } = req.params;
 
   try {
     const task = await Tasks.findById(task_id, user_id);
 
-    if (task) {
+    if (task.length) {
       res.status(200).json(task);
     } else {
       res.status(400).json({
@@ -67,19 +68,65 @@ router.post('/createTask', async (req, res) => {
 
   const TaskData = req.body;
 
-  if (!TaskData.task_id || !TaskData.user_id || !TaskData.due_date) {
+  if (!TaskData.user_id || !TaskData.due_date) {
     res
       .status(400)
       .json({ message: 'Task must have a task_id, user_id, and due_date' });
   } else {
     try {
-      const task = await Tasks.add(TaskData);
-      res.status(201).json(task);
+      // check if task name already exists in task_names table
+      const taskNameRes = await TaskNames.findBy(
+        { name: TaskData.task_name.toLowerCase() },
+        TaskData.user_id
+      );
+
+      let newTaskNameRes = [{ ...TaskData }];
+
+      // if the task name doesn't exist in the task_names table, add it
+      if (!taskNameRes.length) {
+        const newTaskName = {
+          name: TaskData.task_name.toLowerCase(),
+          user_id: TaskData.user_id,
+        };
+
+        newTaskNameRes = await TaskNames.createTaskName(newTaskName);
+      }
+
+      // check if category name already exists in categories table
+      const categoryRes = await Categories.findBy(
+        { name: TaskData.category_name },
+        TaskData.user_id
+      );
+
+      let newCategoryRes = [...categoryRes];
+
+      // if the category name doesn't exist in the categories table, add it
+      if (!categoryRes.length) {
+        const newCategory = {
+          name: TaskData.category_name,
+          user_id: TaskData.user_id,
+        };
+
+        newCategoryRes = await Categories.createCategory(newCategory);
+      }
+
+      const newTask = {
+        user_id: TaskData.user_id,
+        task_id: newTaskNameRes[0].id,
+        category_id: newCategoryRes[0].id,
+        task_notes: TaskData.task_notes,
+        due_date: TaskData.due_date,
+        all_day: TaskData.all_day,
+        is_complete: TaskData.is_complete,
+      };
+
+      // create a new task
+      const addedTaskRes = await Tasks.add(newTask);
+
+      res.status(201).json(addedTaskRes);
     } catch (err) {
-      res.status(500).json({
-        message: 'Failed to create new task!',
-        err,
-      });
+      console.log('err: ', err);
+      res.status(500).json({ message: 'Error finding task_name', err });
     }
   }
 });
