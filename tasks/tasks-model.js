@@ -54,7 +54,18 @@ function findById(id, user_id) {
 
 // Add a new task, returns the whole task
 function add(task) {
-  return db('tasks').insert(task);
+  return db('tasks')
+    .insert(task)
+    .returning([
+      'id',
+      'task_id',
+      'user_id',
+      'category_id',
+      'task_notes',
+      'due_date',
+      'all_day',
+      'is_complete',
+    ]);
 }
 
 // Update existing task, returns the whole task
