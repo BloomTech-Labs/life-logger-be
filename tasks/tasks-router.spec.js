@@ -11,6 +11,12 @@ jest.mock('../auth/authenticate-middleware');
 const TasksModel = require('./tasks-model');
 jest.mock('./tasks-model');
 
+const TaskNamesModel = require('./task-names-model');
+jest.mock('./task-names-model');
+
+const CategoriesModel = require('./categories-model');
+jest.mock('./categories-model');
+
 describe('tasksRouter tests', () => {
   // events end point test one event
   describe('GET', () => {
@@ -73,10 +79,13 @@ describe('tasksRouter tests', () => {
 
         // returns the id of the newly created Task
         TasksModel.add = jest.fn(() => 1);
+        TaskNamesModel.findBy = jest.fn(() => [{ id: 1 }]);
+        CategoriesModel.findBy = jest.fn(() => [{ id: 1 }]);
 
-        const res = await request(server).post('/api/tasks/insertTask').send({
+        const res = await request(server).post('/api/tasks/createTask').send({
           user_id: 1,
-          task_id: 1,
+          task_name: 'Wash car',
+          category_name: 'Home',
           due_date: '2020-05-11T08:10:25.000Z',
         });
 
@@ -87,9 +96,13 @@ describe('tasksRouter tests', () => {
         authenticate.mockImplementation((req, res, next) => next());
         // returns the id of the newly created Task
         TasksModel.add = jest.fn(() => 1);
-        const res = await request(server).post('/api/tasks/insertTask').send({
+        TaskNamesModel.findBy = jest.fn(() => [{ id: 1 }]);
+        CategoriesModel.findBy = jest.fn(() => [{ id: 1 }]);
+
+        const res = await request(server).post('/api/tasks/createTask').send({
           user_id: 1,
-          task_id: 1,
+          task_name: 'Wash car',
+          category_name: 'Home',
           due_date: '2020-05-11T08:10:25.000Z',
         });
 
