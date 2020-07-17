@@ -12,14 +12,11 @@ module.exports = {
 // name
 // user_id -- although this would be redundant
 function findBy(filter, user_id) {
-  console.log('filter: ', filter);
   return db('task_names').where(filter).where({ user_id });
 }
 
 // add new task to `task_names` table
 function createTaskName(task) {
-  console.log('task: ', task);
-
   return db('task_names').insert(task).returning(['id', 'name', 'user_id']);
 }
 

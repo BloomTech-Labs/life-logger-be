@@ -26,14 +26,11 @@ router.get('/findById/user=:user_id/:task_id', async (req, res) => {
 // Return all tasks by user_id
 router.get('/findByUserId/:user_id', async (req, res) => {
   const { user_id } = req.params;
-  console.log('user_id: ', user_id);
 
   try {
-    console.log('in here');
     const tasks = await Tasks.findByUserId(user_id);
     res.status(200).json(tasks);
   } catch (err) {
-    console.log('error here: ', err);
     res.status(500).json({ message: 'Error fetching tasks!', err });
   }
 });
@@ -125,7 +122,6 @@ router.post('/createTask', async (req, res) => {
 
       res.status(201).json(addedTaskRes);
     } catch (err) {
-      console.log('err: ', err);
       res.status(500).json({ message: 'Error finding task_name', err });
     }
   }
