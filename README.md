@@ -2,10 +2,9 @@
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/0915a297bde344a86b20/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/life-logger-be/test_coverage)
 
-
 # API Documentation
 
-#### Backend deployed at [Heroku]( https://lyfe-logger-be.herokuapp.com//) <br>
+#### Backend deployed at [Heroku](https://lyfe-logger-be.herokuapp.com//) <br>
 
 ## Getting started
 
@@ -20,51 +19,111 @@ To get the server running locally:
 
 🚫 Why did you choose this framework?
 
--    Point One
--    Point Two
--    Point Three
--    Point Four
+- Point One
+- Point Two
+- Point Three
+- Point Four
 
 ## Endpoints
 
-#### Events Routes
+#### Task Routes
 
+| Method | Endpoint                                     | Access Control | Description                              |
+| ------ | -------------------------------------------- | -------------- | ---------------------------------------- |
+| GET    | `/api/tasks/findById/user=:user_id/:task_id` | owners         | Get a task by `user_id` and task `id`    |
+| GET    | `/api/tasks/findByUserId/:user_id`           | owners         | Get all tasks by `user_id`               |
+| POST   | `/api/tasks/createTask`                      | owners         | Add a new events.                        |
+| PUT    | `/api/tasks/updateTask/user=:user_id/:id`    | owners         | Update a task by `user_id` and task `id` |
+| DELETE | `/api/tasks/deleteTask/user=:user_id/:id`    | owners         | Delete a task by `user_id` and task `id` |
 
-| Method |               Endpoint             | Access Control |              Description               |
-| ------ | ---------------------------------- | ------------   | -------------------------------------- |
-| GET    | `/api/events`                      | all events     | Returns all events in the events table.|
-| GET    | `/api/events/findbyid/:event_id`   | owners         | Get event by event id.                 |
-| POST   | `/api/events/insertevents`         | owners         | Add a new events.                      |
-| PUT    | `/api/events/updateevent/:id`      | owners         | Update an new event.                   |
-| DELETE | `/api/events/deleteevent/:event_id`| owners         | Delete an event.                       |
+All Task routes require an `authorization` header:
+
+```
+{
+  authorizaton: {
+    token: USER_TOKEN_HERE
+  }
+}
+```
+
+For creating a new task, the POST request for the `/api/tasks/createTask` endpoint requires the following body:
+
+```
+{
+  "user_id": USER_ID,
+  "task_name": TASK_NAME_AS_STRING,
+  "category_name": "CATEGORY_NAME_AS_STRING,
+  "due_date": DATETIME,
+  "is_complete": BOOLEAN (optional, defaults to false),
+  "all_day": BOOLEAN (optional, defaults to false),
+  "task_notes": STRING (optional, defaults to null)
+}
+```
+
+This endpoint will then search in the `task_names` table to see if the provided `task_name` already exists for that user. If not, it will also create a new entry in the `task_names` table. Likewise for the `category_name` in the `categories` table.
+
+Return value upon successful task creation:
+
+```
+{
+  id: TASK ID,
+  user_id: USER_ID,
+  category_id: CATEGORY_ID,
+  task_id: TASK_ID (`id` from entry in `task_names` table),
+  task_notes: STRING,
+  all_day: BOOLEAN,
+  is_complete: BOOLEAN,
+  due_date: DATETIME
+}
+```
 
 #### Users Routes
 
-| Method | Endpoint             | Access Control |     Description      |
+| Method | Endpoint             | Access Control | Description          |
 | ------ | -------------------- | -------------- | -------------------- |
 | POST   | `/api/auth/register` | all users      | Register a new user. |
 | POST   | `/api/auth/login`    | all users      | Login                |
 
+## Data Model
 
-# Data Model
-
-#### EVENTS
+#### TASKS
 
 ---
 
 ```
 {
-   event_id serial PRIMARY KEY,
-   user_id integer NOT NULL,
-   title VARCHAR (50),	
-   event_text VARCHAR (250),	
-   location VARCHAR (50),
-   category integer,
-   event_ct_tm TIMESTAMP,
-   event_st_tm TIMESTAMP,
-   event_et_tm TIMESTAMP,
-   all_day BOOLEAN,
-   event_resource VARCHAR (250)
+   id -- serial PRIMARY KEY,
+   user_id -- integer NOT NULL,
+   task_id -- integer NOT NULL
+   task_notes -- string,
+   category_id -- integer,
+   due_date -- datetime,
+   all_day -- boolean,
+   is_complete -- boolean
+}
+```
+
+#### TASK_NAMES
+
+---
+
+```
+{
+  id -- serial PRIMARY KEY,
+  name -- string NOT NULL,
+  user_id -- integer
+}
+```
+
+#### CATEGORIES
+
+---
+
+```
+{
+  id -- serial PRIMARY KEY,
+  name -- string NOT NULL,
+  user_id -- integer
 }
 ```
 
@@ -89,10 +148,9 @@ create a .env file that includes the following:
     *  POSTGRESS_DEV_PORT=5432
     *  POSTGRESS_DEV_USER=postgres
     *  POSTGRESS_DEV_PASSWORD=password
-    *  POSTGRESS_DEV_DATABASE=lifelogger_be  
+    *  POSTGRESS_DEV_DATABASE=lifelogger_be
     *  JWT_SECRET="aeaeiouAndSometimesY"
-   
-    
+
 ## Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
@@ -101,11 +159,12 @@ Please note we have a [code of conduct](./code_of_conduct.md). Please follow it 
 
 ### Issue/Bug Request
 
- **If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
- - Check first to see if your issue has already been reported.
- - Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
- - Create a live example of the problem.
- - Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes,  where you believe the issue is originating from, and any potential solutions you have considered.
+**If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
+
+- Check first to see if your issue has already been reported.
+- Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
+- Create a live example of the problem.
+- Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes, where you believe the issue is originating from, and any potential solutions you have considered.
 
 ### Feature Requests
 
