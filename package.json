@@ -10,7 +10,8 @@
     "server": "nodemon index.js",
     "test": "cross-env DB_ENV=testing jest --coverage --watch",
     "start": "node index.js",
-    "coverage": "jest --coverage --detectOpenHandles --forceExit || true"
+    "coverage": "jest --coverage --detectOpenHandles --forceExit || true",
+    "heroku-postbuild": "knex migrate:latest"
   },
   "jest": {
     "testEnvironment": "node"
