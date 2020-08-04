@@ -4,8 +4,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 function generateToken(user) {
-  console.log(user);
-
   const payload = {
     username: user.username,
     id: user.id,
@@ -34,7 +32,7 @@ router.post('/register', (req, res) => {
       res.status(201).json({
         message: 'User registration complete',
         token,
-        userId: id,
+        user_id: id,
       });
     })
     .catch((err) => {
@@ -75,7 +73,6 @@ router.post('/validate-token', (req, res) => {
           isAuthenticated: false,
         });
       } else {
-        console.log('over here');
         req.user = decodedToken;
         res.status(200).send({ isAuthenticated: true });
       }
