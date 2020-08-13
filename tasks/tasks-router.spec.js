@@ -117,12 +117,27 @@ describe('tasksRouter tests', () => {
       it('return a 200 status for successful update', async () => {
         authenticate.mockImplementation((req, res, next) => next());
         TasksModel.findById = jest.fn(() => [
-          { user_id: 1, id: 1, task_notes: 'i am a task' },
+          {
+            user_id: 1,
+            id: 1,
+            category_name: 'School',
+            task_name: 'a third test',
+            task_notes: 'notey notes',
+            due_date: '2020-08-22',
+            all_day: false,
+            is_complete: false,
+          },
         ]);
+
         TasksModel.update = jest.fn(() => ({
           user_id: 1,
           id: 1,
-          task_notes: 'i am an updated task',
+          category_name: 'School',
+          task_name: 'a third test',
+          task_notes: 'notey notes',
+          due_date: '2020-08-22',
+          all_day: false,
+          is_complete: false,
         }));
 
         const res = await request(server)

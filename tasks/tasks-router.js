@@ -181,42 +181,46 @@ router.put('/updateTask/user=:user_id/:id', async (req, res) => {
     is_complete: changes.is_complete,
   };
 
-  // check if task name already exists in task_names table
-  const taskNameRes = await TaskNames.findBy(
-    { name: changes.task_name.toLowerCase() },
-    user_id
-  );
+  if (changes.task_name) {
+    // check if task name already exists in task_names table
+    const taskNameRes = await TaskNames.findBy(
+      { name: changes.task_name.toLowerCase() },
+      user_id
+    );
 
-  // if the task name doesn't exist in the task_names table, add it
-  if (!taskNameRes.length) {
-    const newTaskName = {
-      name: changes.task_name.toLowerCase(),
-      user_id,
-    };
+    // if the task name doesn't exist in the task_names table, add it
+    if (!taskNameRes.length) {
+      const newTaskName = {
+        name: changes.task_name.toLowerCase(),
+        user_id,
+      };
 
-    const newTaskNameRes = await TaskNames.createTaskName(newTaskName);
-    editedTask.task_id = newTaskNameRes[0].id;
-  } else {
-    editedTask.task_id = taskNameRes[0].id;
+      const newTaskNameRes = await TaskNames.createTaskName(newTaskName);
+      editedTask.task_id = newTaskNameRes[0].id;
+    } else {
+      editedTask.task_id = taskNameRes[0].id;
+    }
   }
 
-  // check if category name already exists in categories table
-  const categoryRes = await Categories.findBy(
-    { name: changes.category_name },
-    user_id
-  );
+  if (changes.category_name) {
+    // check if category name already exists in categories table
+    const categoryRes = await Categories.findBy(
+      { name: changes.category_name },
+      user_id
+    );
 
-  // if the category name doesn't exist in the categories table, add it
-  if (!categoryRes.length) {
-    const newCategory = {
-      name: changes.category_name,
-      user_id,
-    };
+    // if the category name doesn't exist in the categories table, add it
+    if (!categoryRes.length) {
+      const newCategory = {
+        name: changes.category_name,
+        user_id,
+      };
 
-    const newCategoryRes = await Categories.createCategory(newCategory);
-    editedTask.category_id = newCategoryRes[0].id;
-  } else {
-    editedTask.category_id = categoryRes[0].id;
+      const newCategoryRes = await Categories.createCategory(newCategory);
+      editedTask.category_id = newCategoryRes[0].id;
+    } else {
+      editedTask.category_id = categoryRes[0].id;
+    }
   }
 
   try {
