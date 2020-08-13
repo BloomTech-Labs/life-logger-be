@@ -70,7 +70,19 @@ function add(task) {
 
 // Update existing task, returns the whole task
 function update(id, changes, user_id) {
-  return db('tasks').where({ id }).where({ user_id }).update(changes, '*');
+  return db('tasks')
+    .where({ id })
+    .where({ user_id })
+    .update(changes, [
+      'id',
+      'user_id',
+      'category_id',
+      'task_id',
+      'task_notes',
+      'due_date',
+      'all_day',
+      'is_complete',
+    ]);
 }
 
 // Delete a task

@@ -173,12 +173,62 @@ router.put('/updateTask/user=:user_id/:id', async (req, res) => {
   const { id, user_id } = req.params;
   const changes = req.body;
 
+  const editedTask = {
+    user_id: changes.user_id,
+    task_notes: changes.task_notes,
+    due_date: new Date(changes.due_date),
+    all_day: changes.all_day,
+    is_complete: changes.is_complete,
+  };
+
+  if (changes.task_name) {
+    // check if task name already exists in task_names table
+    const taskNameRes = await TaskNames.findBy(
+      { name: changes.task_name.toLowerCase() },
+      user_id
+    );
+
+    // if the task name doesn't exist in the task_names table, add it
+    if (!taskNameRes.length) {
+      const newTaskName = {
+        name: changes.task_name.toLowerCase(),
+        user_id,
+      };
+
+      const newTaskNameRes = await TaskNames.createTaskName(newTaskName);
+      editedTask.task_id = newTaskNameRes[0].id;
+    } else {
+      editedTask.task_id = taskNameRes[0].id;
+    }
+  }
+
+  if (changes.category_name) {
+    // check if category name already exists in categories table
+    const categoryRes = await Categories.findBy(
+      { name: changes.category_name },
+      user_id
+    );
+
+    // if the category name doesn't exist in the categories table, add it
+    if (!categoryRes.length) {
+      const newCategory = {
+        name: changes.category_name,
+        user_id,
+      };
+
+      const newCategoryRes = await Categories.createCategory(newCategory);
+      editedTask.category_id = newCategoryRes[0].id;
+    } else {
+      editedTask.category_id = categoryRes[0].id;
+    }
+  }
+
   try {
     const task = await Tasks.findById(id, user_id);
 
     if (task.length) {
       try {
-        const updatedTask = await Tasks.update(id, changes, user_id);
+        const updatedTask = await Tasks.update(id, editedTask, user_id);
         res.status(200).json(updatedTask);
       } catch (err) {
         res.status(400).json({
