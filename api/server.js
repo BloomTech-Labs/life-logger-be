@@ -18,6 +18,7 @@ server.use(
       'http://localhost:3000',
       'https://lyfe-logger-fe.herokuapp.com',
       'https://lyfe-logger.com',
+      '192.68.0.79:3000',
     ],
     credentials: true,
   })

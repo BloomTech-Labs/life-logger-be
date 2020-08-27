@@ -149,7 +149,7 @@ create a .env file that includes the following:
     *  POSTGRESS_DEV_USER=postgres
     *  POSTGRESS_DEV_PASSWORD=password
     *  POSTGRESS_DEV_DATABASE=lifelogger_be
-    *  JWT_SECRET="aeaeiouAndSometimesY"
+    *  JWT_SECRET="YOUR_SECRET_HERE"
 
 ## Contributing
 

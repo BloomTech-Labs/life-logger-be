@@ -11,7 +11,7 @@ function generateToken(user) {
   const options = {
     expiresIn: '1d',
   };
-  return jwt.sign(payload, 'aeaeiouAndSometimesY', options);
+  return jwt.sign(payload, process.env.JWT_SECRET, options);
 }
 
 router.post('/register', (req, res) => {
@@ -66,7 +66,7 @@ router.post('/login', (req, res) => {
 router.post('/validate-token', (req, res) => {
   const token = req.headers.authorization;
   if (token) {
-    jwt.verify(token, 'aeaeiouAndSometimesY', (err, decodedToken) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
       if (err) {
         res.status(401).json({
           you: 'Access Denied!',
